@@ -10,11 +10,20 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesWellnessRouteImport } from './routes/services.wellness'
+import { Route as ServicesStylingRouteImport } from './routes/services.styling'
+import { Route as ServicesHeritageRouteImport } from './routes/services.heritage'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioRoute = PortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -22,31 +31,81 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesWellnessRoute = ServicesWellnessRouteImport.update({
+  id: '/services/wellness',
+  path: '/services/wellness',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesStylingRoute = ServicesStylingRouteImport.update({
+  id: '/services/styling',
+  path: '/services/styling',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesHeritageRoute = ServicesHeritageRouteImport.update({
+  id: '/services/heritage',
+  path: '/services/heritage',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/services/heritage': typeof ServicesHeritageRoute
+  '/services/styling': typeof ServicesStylingRoute
+  '/services/wellness': typeof ServicesWellnessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/services/heritage': typeof ServicesHeritageRoute
+  '/services/styling': typeof ServicesStylingRoute
+  '/services/wellness': typeof ServicesWellnessRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/services/heritage': typeof ServicesHeritageRoute
+  '/services/styling': typeof ServicesStylingRoute
+  '/services/wellness': typeof ServicesWellnessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sitemap.xml'
+  fullPaths:
+    | '/'
+    | '/portfolio'
+    | '/sitemap.xml'
+    | '/services/heritage'
+    | '/services/styling'
+    | '/services/wellness'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sitemap.xml'
-  id: '__root__' | '/' | '/sitemap.xml'
+  to:
+    | '/'
+    | '/portfolio'
+    | '/sitemap.xml'
+    | '/services/heritage'
+    | '/services/styling'
+    | '/services/wellness'
+  id:
+    | '__root__'
+    | '/'
+    | '/portfolio'
+    | '/sitemap.xml'
+    | '/services/heritage'
+    | '/services/styling'
+    | '/services/wellness'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PortfolioRoute: typeof PortfolioRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ServicesHeritageRoute: typeof ServicesHeritageRoute
+  ServicesStylingRoute: typeof ServicesStylingRoute
+  ServicesWellnessRoute: typeof ServicesWellnessRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +117,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portfolio': {
+      id: '/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -65,12 +131,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/wellness': {
+      id: '/services/wellness'
+      path: '/services/wellness'
+      fullPath: '/services/wellness'
+      preLoaderRoute: typeof ServicesWellnessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/styling': {
+      id: '/services/styling'
+      path: '/services/styling'
+      fullPath: '/services/styling'
+      preLoaderRoute: typeof ServicesStylingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/heritage': {
+      id: '/services/heritage'
+      path: '/services/heritage'
+      fullPath: '/services/heritage'
+      preLoaderRoute: typeof ServicesHeritageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PortfolioRoute: PortfolioRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ServicesHeritageRoute: ServicesHeritageRoute,
+  ServicesStylingRoute: ServicesStylingRoute,
+  ServicesWellnessRoute: ServicesWellnessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

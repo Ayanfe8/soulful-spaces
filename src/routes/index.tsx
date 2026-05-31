@@ -1,4 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { SiteNav } from "@/components/SiteNav";
+import { SiteFooter } from "@/components/SiteFooter";
 import heroImg from "@/assets/hero-interior.jpg";
 import stylingImg from "@/assets/service-styling.jpg";
 import wellnessImg from "@/assets/service-wellness.jpg";
@@ -39,23 +41,23 @@ const services = [
   {
     n: "01",
     title: "Interior Styling",
-    caption: "Spatial Storytelling",
     body: "Thoughtfully curated interiors designed around your lifestyle, personality, and the rhythm of how you live.",
     img: stylingImg,
+    to: "/services/styling" as const,
   },
   {
     n: "02",
     title: "Wellness-Inspired Living",
-    caption: "Architectural Soul",
     body: "Environments engineered for restoration — natural light, sustainable materials, and considered stillness.",
     img: wellnessImg,
+    to: "/services/wellness" as const,
   },
   {
     n: "03",
     title: "Modern Heritage",
-    caption: "Heritage Modern",
     body: "Global sophistication meets African warmth. Refined finishes, sculptural form, and pieces that carry meaning.",
     img: heritageImg,
+    to: "/services/heritage" as const,
   },
 ];
 
@@ -65,17 +67,7 @@ const experienceRow2 = ["Identity", "Refined", "Heritage", "Home"];
 function Index() {
   return (
     <div className="bg-bone text-charcoal font-sans selection:bg-terracotta/20">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 px-6 py-8 md:px-12 flex justify-between items-end mix-blend-difference">
-        <a href="#top" className="font-serif text-2xl font-medium tracking-tight text-bone">
-          Habitat<span className="text-terracotta">.</span>
-        </a>
-        <div className="hidden md:flex gap-8 text-xs uppercase tracking-[0.2em] text-bone">
-          <a href="#philosophy" className="hover:opacity-60 transition-opacity">Philosophy</a>
-          <a href="#services" className="hover:opacity-60 transition-opacity">Services</a>
-          <a href="#contact" className="hover:opacity-60 transition-opacity">Contact</a>
-        </div>
-      </nav>
+      <SiteNav variant="overlay" />
 
       {/* Hero */}
       <section id="top" className="relative h-screen w-full flex items-end overflow-hidden bg-umber">
@@ -87,7 +79,7 @@ function Index() {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/10 to-charcoal/30" />
-        <div className="absolute top-1/2 left-6 md:left-12 -translate-y-1/2 text-bone/60 text-[10px] uppercase tracking-[0.3em] [writing-mode:vertical-rl] rotate-180">
+        <div className="hidden md:block absolute top-1/2 left-6 md:left-12 -translate-y-1/2 text-bone/60 text-[10px] uppercase tracking-[0.3em] [writing-mode:vertical-rl] rotate-180">
           Modern African Interiors — Est. Lagos
         </div>
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pb-24 md:px-12 animate-reveal">
@@ -126,8 +118,8 @@ function Index() {
               Every texture, color, object, and detail is intentionally chosen to create harmony
               between beauty, comfort, functionality, and the soul of the people who live within.
             </p>
-            <a
-              href="#services"
+            <Link
+              to="/portfolio"
               className="group inline-flex items-center bg-charcoal text-bone pl-2 pr-5 py-2 rounded-full ring-1 ring-charcoal transition-transform hover:scale-[1.02]"
             >
               <span className="size-9 bg-terracotta rounded-full flex items-center justify-center mr-3">
@@ -136,9 +128,9 @@ function Index() {
                 </svg>
               </span>
               <span className="text-xs font-medium uppercase tracking-[0.2em]">
-                The Experience
+                See the Portfolio
               </span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -188,32 +180,38 @@ function Index() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24">
             {services.map((s, idx) => (
-              <article
+              <Link
                 key={s.n}
-                className={`flex flex-col gap-8 ${
+                to={s.to}
+                className={`group flex flex-col gap-8 ${
                   idx === 1 ? "md:mt-12 lg:mt-24" : idx === 2 ? "lg:mt-12" : ""
                 }`}
               >
                 <div className="w-full aspect-[4/5] overflow-hidden rounded-sm bg-clay/30 outline-1 -outline-offset-1 outline-black/5">
                   <img
                     src={s.img}
-                    alt={s.caption}
+                    alt={s.title}
                     loading="lazy"
                     width={960}
                     height={1200}
-                    className="w-full h-full object-cover transition-transform duration-[1200ms] hover:scale-[1.03]"
+                    className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-[1.03]"
                   />
                 </div>
                 <div className="flex gap-6">
                   <span className="font-serif text-2xl text-terracotta">{s.n}</span>
                   <div>
-                    <h4 className="font-serif text-2xl mb-3 font-medium">{s.title}</h4>
+                    <h4 className="font-serif text-2xl mb-3 font-medium group-hover:italic transition-all">
+                      {s.title}
+                    </h4>
                     <p className="text-sm text-umber/75 leading-relaxed max-w-[40ch] text-pretty">
                       {s.body}
                     </p>
+                    <span className="inline-block mt-4 text-[11px] uppercase tracking-[0.25em] text-terracotta border-b border-terracotta/40 pb-0.5">
+                      Explore →
+                    </span>
                   </div>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
@@ -240,32 +238,7 @@ function Index() {
         </div>
       </section>
 
-      {/* Footer / CTA */}
-      <footer id="contact" className="bg-charcoal text-bone py-24 md:py-32 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
-          <span className="uppercase tracking-[0.3em] text-xs opacity-50 mb-12">
-            Start Your Project
-          </span>
-          <h2 className="font-serif text-5xl md:text-7xl mb-16 text-balance max-w-[20ch] font-light">
-            Ready to create a space that feels like <em className="italic text-clay">you?</em>
-          </h2>
-          <a
-            href="mailto:hello@habitatbygrayson.com"
-            className="text-2xl md:text-4xl font-serif italic border-b border-bone/20 pb-4 hover:text-terracotta transition-colors"
-          >
-            hello@habitatbygrayson.com
-          </a>
-
-          <div className="w-full mt-32 pt-8 border-t border-bone/10 flex flex-col md:flex-row justify-between gap-6 text-[11px] uppercase tracking-[0.25em] opacity-50">
-            <span>Habitat by Grayson &copy; {new Date().getFullYear()}</span>
-            <div className="flex gap-8">
-              <a href="#" className="hover:text-terracotta">Instagram</a>
-              <a href="#" className="hover:text-terracotta">Pinterest</a>
-              <a href="#" className="hover:text-terracotta">Journal</a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
