@@ -11,18 +11,27 @@ export function SiteFooter() {
           Ready to create a space that feels like{" "}
           <em className="italic text-clay">you?</em>
         </h2>
+        <Link
+          to="/book"
+          className="inline-block px-10 py-5 bg-bone text-charcoal uppercase tracking-[0.25em] text-xs hover:bg-terracotta hover:text-bone transition-colors"
+        >
+          Book a consultation
+        </Link>
         <a
           href="mailto:hello@habitatbygrayson.com"
-          className="text-2xl md:text-4xl font-serif italic border-b border-bone/20 pb-4 hover:text-terracotta transition-colors"
+          className="mt-10 text-base md:text-lg font-serif italic border-b border-bone/20 pb-2 hover:text-terracotta transition-colors"
         >
           hello@habitatbygrayson.com
         </a>
+
 
         <div className="w-full mt-24 md:mt-32 pt-8 border-t border-bone/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-[11px] uppercase tracking-[0.25em] opacity-60 text-left">
           <div className="flex flex-col gap-3">
             <span className="opacity-50">Studio</span>
             <Link to="/" className="hover:text-terracotta">Home</Link>
             <Link to="/portfolio" className="hover:text-terracotta">Portfolio</Link>
+            <Link to="/book" className="hover:text-terracotta">Book</Link>
+
           </div>
           <div className="flex flex-col gap-3">
             <span className="opacity-50">Services</span>

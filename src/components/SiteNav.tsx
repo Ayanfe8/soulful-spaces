@@ -19,7 +19,7 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
         Habitat<span className="text-terracotta">.</span>
       </Link>
       <div
-        className={`hidden md:flex gap-8 text-xs uppercase tracking-[0.2em] ${
+        className={`hidden md:flex items-center gap-8 text-xs uppercase tracking-[0.2em] ${
           overlay ? "text-bone" : "text-charcoal"
         }`}
       >
@@ -27,7 +27,18 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
         <Link to="/services/wellness" className="hover:opacity-60 transition-opacity">Wellness</Link>
         <Link to="/services/heritage" className="hover:opacity-60 transition-opacity">Heritage</Link>
         <Link to="/portfolio" className="hover:opacity-60 transition-opacity">Portfolio</Link>
+        <Link
+          to="/book"
+          className={`px-4 py-2 border transition-colors ${
+            overlay
+              ? "border-bone hover:bg-bone hover:text-charcoal"
+              : "border-charcoal hover:bg-charcoal hover:text-bone"
+          }`}
+        >
+          Book
+        </Link>
       </div>
+
     </nav>
   );
 }
