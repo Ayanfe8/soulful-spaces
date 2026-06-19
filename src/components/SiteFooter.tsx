@@ -1,9 +1,18 @@
 import { Link } from "@tanstack/react-router";
+import logo from "@/assets/logo.png";
 
 export function SiteFooter() {
   return (
     <footer id="contact" className="bg-charcoal text-bone py-24 md:py-32 px-6 md:px-12">
       <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
+        <img
+          src={logo}
+          alt="Habitat by Grayson"
+          className="h-10 md:h-12 w-auto object-contain brightness-0 invert opacity-70 mb-8"
+          width={256}
+          height={64}
+          loading="lazy"
+        />
         <span className="uppercase tracking-[0.3em] text-xs opacity-50 mb-12">
           Start Your Project
         </span>

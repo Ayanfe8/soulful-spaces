@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import logo from "@/assets/logo.png";
 
 export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }) {
   const overlay = variant === "overlay";
@@ -6,17 +7,18 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
     <nav
       className={
         overlay
-          ? "fixed top-0 w-full z-50 px-6 py-8 md:px-12 flex justify-between items-end mix-blend-difference"
-          : "sticky top-0 w-full z-50 px-6 py-6 md:px-12 flex justify-between items-center bg-bone/85 backdrop-blur-md border-b border-charcoal/5"
+          ? "fixed top-0 w-full z-50 px-6 py-6 md:px-12 flex justify-between items-center mix-blend-difference"
+          : "sticky top-0 w-full z-50 px-6 py-5 md:px-12 flex justify-between items-center bg-bone/85 backdrop-blur-md border-b border-charcoal/5"
       }
     >
-      <Link
-        to="/"
-        className={`font-serif text-2xl font-medium tracking-tight ${
-          overlay ? "text-bone" : "text-charcoal"
-        }`}
-      >
-        Habitat<span className="text-terracotta">.</span>
+      <Link to="/" className="flex items-center">
+        <img
+          src={logo}
+          alt="Habitat by Grayson"
+          className={`h-8 md:h-9 w-auto object-contain ${overlay ? "brightness-0 invert" : ""}`}
+          width={256}
+          height={64}
+        />
       </Link>
       <div
         className={`hidden md:flex items-center gap-8 text-xs uppercase tracking-[0.2em] ${
