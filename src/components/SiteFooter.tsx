@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/logo.png";
+import logoAsset from "@/assets/habitat-logo.jpeg.asset.json";
+
+const logo = logoAsset.url;
 
 export function SiteFooter() {
   return (
@@ -7,15 +9,12 @@ export function SiteFooter() {
       <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
         <img
           src={logo}
-          alt="Habitat by Grayson"
-          className="h-10 md:h-12 w-auto object-contain brightness-0 invert opacity-70 mb-8"
-          width={256}
-          height={64}
+          alt="Habitat by Grayson — Spaces that tell your story"
+          className="w-40 md:w-52 h-auto object-contain rounded-sm mb-12 shadow-2xl"
+          width={512}
+          height={512}
           loading="lazy"
         />
-        <span className="uppercase tracking-[0.3em] text-xs opacity-50 mb-12">
-          Start Your Project
-        </span>
         <h2 className="font-serif text-5xl md:text-7xl mb-16 text-balance max-w-[20ch] font-light">
           Ready to create a space that feels like{" "}
           <em className="italic text-clay">you?</em>

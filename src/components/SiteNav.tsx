@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/logo.png";
+import logoAsset from "@/assets/habitat-logo.jpeg.asset.json";
+
+const logo = logoAsset.url;
 
 export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }) {
   const overlay = variant === "overlay";
@@ -15,9 +17,9 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
         <img
           src={logo}
           alt="Habitat by Grayson"
-          className={`h-8 md:h-9 w-auto object-contain ${overlay ? "brightness-0 invert" : ""}`}
+          className={`h-10 md:h-12 w-auto object-contain rounded-sm ${overlay ? "ring-1 ring-bone/20 shadow-lg" : ""}`}
           width={256}
-          height={64}
+          height={256}
         />
       </Link>
       <div
