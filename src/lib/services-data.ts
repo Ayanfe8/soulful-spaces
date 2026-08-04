@@ -1,5 +1,6 @@
 import { queryOptions } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
+import { getServiceBySlug } from "@/lib/services.functions";
+
 
 import heritageHero from "@/assets/service-heritage.jpg";
 import stylingHero from "@/assets/service-styling.jpg";
