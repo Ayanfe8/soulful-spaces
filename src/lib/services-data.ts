@@ -52,23 +52,8 @@ const SLUG_LABELS: Record<string, string> = {
 };
 
 async function fetchServiceBySlug(slug: string): Promise<ServicePageData> {
-  const { data: service, error } = await supabase
-    .from("services")
-    .select(
-      `
-      slug, eyebrow, title, intro, hero_image_path, hero_alt, next_service_slug,
-      service_outcomes(title, body, sort_order),
-      service_process_steps(step_number, title, body),
-      service_deliverables(text, sort_order),
-      service_gallery_images(image_path, alt, sort_order)
-      `,
-    )
-    .eq("slug", slug)
-    .single();
+  const service = await getServiceBySlug({ data: { slug } });
 
-  if (error || !service) {
-    throw new Error(error?.message ?? `Service "${slug}" not found`);
-  }
 
   const outcomes = [...(service.service_outcomes ?? [])]
     .sort((a, b) => a.sort_order - b.sort_order)
