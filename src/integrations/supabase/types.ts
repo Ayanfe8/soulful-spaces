@@ -53,6 +53,66 @@ export type Database = {
         }
         Relationships: []
       }
+      faq_items: {
+        Row: {
+          answer: string
+          created_at: string
+          id: string
+          question: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          answer: string
+          created_at?: string
+          id?: string
+          question: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          answer?: string
+          created_at?: string
+          id?: string
+          question?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      homepage_packages: {
+        Row: {
+          body: string | null
+          created_at: string
+          id: string
+          sort_order: number
+          tag: string | null
+          title: string
+          updated_at: string
+          wide: boolean
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          sort_order?: number
+          tag?: string | null
+          title: string
+          updated_at?: string
+          wide?: boolean
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          sort_order?: number
+          tag?: string | null
+          title?: string
+          updated_at?: string
+          wide?: boolean
+        }
+        Relationships: []
+      }
       portfolio_projects: {
         Row: {
           category: string
@@ -279,6 +339,36 @@ export type Database = {
           slug?: string
           sort_order?: number
           title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          author_detail: string | null
+          author_name: string | null
+          created_at: string
+          id: string
+          quote: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          author_detail?: string | null
+          author_name?: string | null
+          created_at?: string
+          id?: string
+          quote: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          author_detail?: string | null
+          author_name?: string | null
+          created_at?: string
+          id?: string
+          quote?: string
+          sort_order?: number
           updated_at?: string
         }
         Relationships: []
