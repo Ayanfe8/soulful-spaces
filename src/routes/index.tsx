@@ -87,6 +87,11 @@ const experienceRow1 = ["Peace", "Belonging", "Soul", "Comfort"];
 const experienceRow2 = ["Identity", "Refined", "Heritage", "Home"];
 
 function Index() {
+  const { data } = useSuspenseQuery(homepageContentQueryOptions());
+  const packages = data.packages;
+  const faqs = data.faqs;
+  const featuredTestimonial = data.testimonials[0];
+
   return (
     <div className="bg-bone text-charcoal font-sans selection:bg-terracotta/20">
       <SiteNav variant="overlay" />
@@ -246,8 +251,8 @@ function Index() {
             Why Habitat
           </span>
           <p className="font-serif text-3xl md:text-5xl leading-[1.15] italic font-light text-balance">
-            “Even faith speaks of prepared spaces. We design with soul — because when a space
-            truly reflects who you are, it becomes part of your story.”
+            {featuredTestimonial ? `“${featuredTestimonial.quote}”` : null}
+
           </p>
           <div className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-6 max-w-3xl mx-auto text-xs uppercase tracking-[0.2em] text-bone/70">
             <span>Modern African Luxury</span>
@@ -346,34 +351,8 @@ function Index() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-charcoal/10 border border-charcoal/10">
-            {[
-              {
-                tag: "01 — Consultation",
-                title: "The Habitat Home Edit",
-                body: "A guided styling direction for people who want to shop and style themselves. Includes consultation, custom mood board, shopping list, and a written styling direction.",
-              },
-              {
-                tag: "02 — One Room",
-                title: "Room Story Styling",
-                body: "One room, fully styled and transformed. Perfect for a living room, bedroom, or reading nook that deserves its own moment.",
-              },
-              {
-                tag: "03 — New Homes",
-                title: "Move-In Ready Styling",
-                body: "For new homes and apartments. We prepare the space so it feels finished, personal, and warm from the day you walk in.",
-              },
-              {
-                tag: "04 — Hospitality",
-                title: "Shortlet & Airbnb Styling",
-                body: "Guest-ready interiors designed for beauty, comfort, and stronger booking appeal — spaces that photograph well and feel even better in person.",
-              },
-              {
-                tag: "05 — Full Home",
-                title: "Signature Habitat Transformation",
-                body: "Our most complete offering. A full home styling and curated interior experience — art, objects, textiles, and stories woven together with intention.",
-                wide: true,
-              },
-            ].map((s) => (
+            {packages.map((s) => (
+
               <div
                 key={s.title}
                 className={`bg-bone p-10 md:p-12 flex flex-col gap-4 hover:bg-clay/20 transition-colors ${
@@ -551,42 +530,19 @@ function Index() {
             </h2>
           </div>
           <Accordion type="single" collapsible className="w-full">
-            {[
-              {
-                q: "Can I start with just one room?",
-                a: "Absolutely. Room Story Styling was created for exactly that — a single space, fully considered and transformed. It's one of the most beautiful ways to experience Habitat for the first time.",
-              },
-              {
-                q: "Do you offer consultation only?",
-                a: "Yes. The Habitat Home Edit is a consultation-led package that includes a custom mood board, shopping list, and written styling direction — perfect if you'd like to style your space yourself with expert guidance.",
-              },
-              {
-                q: "Can you style a shortlet or Airbnb?",
-                a: "Yes — this is one of our specialties. We design guest-ready interiors that photograph beautifully, feel warm on arrival, and give your property a stronger booking edge.",
-              },
-              {
-                q: "Do you work with existing furniture?",
-                a: "Yes. We often blend heirloom pieces and existing furniture with new curation. Great design honours what's already meaningful and edits with intention.",
-              },
-              {
-                q: "Can I work with you if I am outside Lagos or outside Nigeria?",
-                a: "Yes. We work with diaspora homeowners across the world and offer remote consultations, virtual mood boards, and full project coordination for homes anywhere on the continent.",
-              },
-              {
-                q: "How do I get started?",
-                a: "Book a discovery call or send us photos of your space. We'll listen to your story, understand your vision, and recommend the Habitat service that fits you best.",
-              },
-            ].map((f, i) => (
+            {faqs.map((f, i) => (
+
               <AccordionItem
                 key={i}
                 value={`item-${i}`}
                 className="border-b border-charcoal/15"
               >
                 <AccordionTrigger className="font-serif text-xl md:text-2xl font-light py-6 hover:no-underline">
-                  {f.q}
+                  {f.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-umber/80 leading-relaxed pb-6 max-w-[62ch]">
-                  {f.a}
+                  {f.answer}
+
                 </AccordionContent>
               </AccordionItem>
             ))}
