@@ -14,6 +14,9 @@ import heritageImg from "@/assets/service-heritage.jpg";
 import p1 from "@/assets/portfolio-1.jpg";
 import p2 from "@/assets/portfolio-2.jpg";
 import p3 from "@/assets/portfolio-3.jpg";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { homepageContentQueryOptions } from "@/lib/homepage-data";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -43,8 +46,18 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
+  loader: ({ context }) => {
+    void context.queryClient.ensureQueryData(homepageContentQueryOptions());
+  },
+  errorComponent: ({ error }) => (
+    <div role="alert" className="p-12 text-center text-umber">
+      {error.message}
+    </div>
+  ),
+  notFoundComponent: () => <div className="p-12 text-center text-umber">Page not found.</div>,
   component: Index,
 });
+
 
 const services = [
   {
