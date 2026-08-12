@@ -390,7 +390,7 @@ function BookPage() {
           </div>
         </form>
       </main>
-      <SiteFooter />
+      <SiteFooter settings={settings} />
     </div>
   );
 }
