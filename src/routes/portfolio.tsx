@@ -165,7 +165,7 @@ function PortfolioPage() {
         </div>
       </section>
 
-      <SiteFooter />
+      <SiteFooter settings={settings} />
 
       {/* Lightbox */}
       {lightbox && (
