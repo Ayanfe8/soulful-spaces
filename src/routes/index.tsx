@@ -97,6 +97,10 @@ function Index() {
     settings?.hero_subhead ??
     "A modern African interior and lifestyle brand. We design intentional homes that reflect identity, hold memory, and feel undeniably like you.";
 
+  const headlineParts = heroHeadline.trim().split(" ");
+  const headlineBody = headlineParts.slice(0, -1).join(" ");
+  const headlineAccent = headlineParts.slice(-1).join(" ");
+
   return (
     <div className="bg-bone text-charcoal font-sans selection:bg-terracotta/20">
       <SiteNav variant="overlay" />
@@ -118,8 +122,15 @@ function Index() {
           <span className="block uppercase tracking-[0.3em] text-bone/70 text-xs mb-8">
             Habitat by Grayson
           </span>
-          <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl text-bone leading-[0.95] text-balance max-w-[18ch] font-light whitespace-pre-line">
-            {heroHeadline}
+          <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl text-bone leading-[0.95] text-balance max-w-[18ch] font-light">
+            {headlineParts.length > 1 ? (
+              <>
+                {headlineBody}{" "}
+                <em className="italic font-normal text-clay">{headlineAccent}</em>
+              </>
+            ) : (
+              heroHeadline
+            )}
           </h1>
           <p className="mt-10 max-w-md text-bone/75 leading-relaxed">{heroSubhead}</p>
         </div>
