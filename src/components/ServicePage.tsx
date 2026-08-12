@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { SiteNav } from "./SiteNav";
 import { SiteFooter } from "./SiteFooter";
+import type { Database } from "@/integrations/supabase/types";
 
 export interface ServicePageProps {
   eyebrow: string;
@@ -13,6 +14,10 @@ export interface ServicePageProps {
   deliverables: string[];
   galleryImgs: { src: string; alt: string }[];
   nextLink: { to: string; label: string };
+  settings?: Pick<
+    Database["public"]["Tables"]["site_settings"]["Row"],
+    "contact_email" | "instagram_url" | "pinterest_url" | "journal_enabled"
+  > | null;
 }
 
 export function ServicePage(p: ServicePageProps) {
