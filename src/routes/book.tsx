@@ -31,6 +31,7 @@ export const Route = createFileRoute("/book")({
       },
     ],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteSettingsQueryOptions()),
   component: BookPage,
 });
 
