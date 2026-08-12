@@ -2,11 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ServicePage } from "@/components/ServicePage";
 import { serviceQueryOptions } from "@/lib/services-data";
+import { siteSettingsQueryOptions } from "@/lib/site-settings-data";
 import heroImg from "@/assets/service-styling.jpg";
 
 export const Route = createFileRoute("/services/styling")({
   loader: ({ context }) =>
-    context.queryClient.ensureQueryData(serviceQueryOptions("styling")),
+    Promise.all([
+      context.queryClient.ensureQueryData(serviceQueryOptions("styling")),
+      context.queryClient.ensureQueryData(siteSettingsQueryOptions()),
+    ]),
   head: () => ({
     meta: [
       { title: "Interior Styling — Habitat by Grayson" },
