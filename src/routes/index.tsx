@@ -90,7 +90,12 @@ function Index() {
   const { data } = useSuspenseQuery(homepageContentQueryOptions());
   const packages = data.packages;
   const faqs = data.faqs;
-  const philosophyQuote = data.settings?.philosophy_quote;
+  const settings = data.settings;
+  const philosophyQuote = settings?.philosophy_quote;
+  const heroHeadline = settings?.hero_headline ?? "Spaces That Tell Your Story.";
+  const heroSubhead =
+    settings?.hero_subhead ??
+    "A modern African interior and lifestyle brand. We design intentional homes that reflect identity, hold memory, and feel undeniably like you.";
 
   return (
     <div className="bg-bone text-charcoal font-sans selection:bg-terracotta/20">
@@ -113,13 +118,10 @@ function Index() {
           <span className="block uppercase tracking-[0.3em] text-bone/70 text-xs mb-8">
             Habitat by Grayson
           </span>
-          <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl text-bone leading-[0.95] text-balance max-w-[18ch] font-light">
-            Spaces That Tell <em className="italic font-normal text-clay">Your Story.</em>
+          <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl text-bone leading-[0.95] text-balance max-w-[18ch] font-light whitespace-pre-line">
+            {heroHeadline}
           </h1>
-          <p className="mt-10 max-w-md text-bone/75 leading-relaxed">
-            A modern African interior and lifestyle brand. We design intentional homes that
-            reflect identity, hold memory, and feel undeniably like you.
-          </p>
+          <p className="mt-10 max-w-md text-bone/75 leading-relaxed">{heroSubhead}</p>
         </div>
       </section>
 
