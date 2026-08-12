@@ -2,11 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ServicePage } from "@/components/ServicePage";
 import { serviceQueryOptions } from "@/lib/services-data";
+import { siteSettingsQueryOptions } from "@/lib/site-settings-data";
 import heroImg from "@/assets/service-wellness.jpg";
 
 export const Route = createFileRoute("/services/wellness")({
   loader: ({ context }) =>
-    context.queryClient.ensureQueryData(serviceQueryOptions("wellness")),
+    Promise.all([
+      context.queryClient.ensureQueryData(serviceQueryOptions("wellness")),
+      context.queryClient.ensureQueryData(siteSettingsQueryOptions()),
+    ]),
   head: () => ({
     meta: [
       { title: "Wellness-Inspired Living — Habitat by Grayson" },
