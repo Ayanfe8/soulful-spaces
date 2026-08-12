@@ -37,5 +37,6 @@ export const Route = createFileRoute("/services/styling")({
 
 function StylingRoute() {
   const { data } = useSuspenseQuery(serviceQueryOptions("styling"));
-  return <ServicePage {...data} />;
+  const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions());
+  return <ServicePage {...data} settings={settings} />;
 }
