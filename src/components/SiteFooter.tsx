@@ -1,9 +1,24 @@
 import { Link } from "@tanstack/react-router";
 import logoAsset from "@/assets/habitat-logo.jpeg.asset.json";
+import type { Database } from "@/integrations/supabase/types";
 
 const logo = logoAsset.url;
 
-export function SiteFooter() {
+type SiteSettingsRow = Database["public"]["Tables"]["site_settings"]["Row"];
+
+interface SiteFooterProps {
+  settings?: Pick<
+    SiteSettingsRow,
+    "contact_email" | "instagram_url" | "pinterest_url" | "journal_enabled"
+  > | null;
+}
+
+export function SiteFooter({ settings }: SiteFooterProps) {
+  const contactEmail = settings?.contact_email ?? "hello@habitatbygrayson.com";
+  const instagramUrl = settings?.instagram_url;
+  const pinterestUrl = settings?.pinterest_url;
+  const journalEnabled = settings?.journal_enabled ?? false;
+
   return (
     <footer id="contact" className="bg-charcoal text-bone py-24 md:py-32 px-6 md:px-12">
       <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
@@ -26,12 +41,11 @@ export function SiteFooter() {
           Book a consultation
         </Link>
         <a
-          href="mailto:hello@habitatbygrayson.com"
+          href={`mailto:${contactEmail}`}
           className="mt-10 text-base md:text-lg font-serif italic border-b border-bone/20 pb-2 hover:text-terracotta transition-colors"
         >
-          hello@habitatbygrayson.com
+          {contactEmail}
         </a>
-
 
         <div className="w-full mt-24 md:mt-32 pt-8 border-t border-bone/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-[11px] uppercase tracking-[0.25em] opacity-60 text-left">
           <div className="flex flex-col gap-3">
@@ -39,7 +53,6 @@ export function SiteFooter() {
             <Link to="/" className="hover:text-terracotta">Home</Link>
             <Link to="/portfolio" className="hover:text-terracotta">Portfolio</Link>
             <Link to="/book" className="hover:text-terracotta">Book</Link>
-
           </div>
           <div className="flex flex-col gap-3">
             <span className="opacity-50">Services</span>
@@ -49,9 +62,35 @@ export function SiteFooter() {
           </div>
           <div className="flex flex-col gap-3">
             <span className="opacity-50">Connect</span>
-            <a href="#" className="hover:text-terracotta">Instagram</a>
-            <a href="#" className="hover:text-terracotta">Pinterest</a>
-            <a href="#" className="hover:text-terracotta">Journal</a>
+            {instagramUrl ? (
+              <a
+                href={instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-terracotta"
+              >
+                Instagram
+              </a>
+            ) : (
+              <span className="opacity-40">Instagram</span>
+            )}
+            {pinterestUrl ? (
+              <a
+                href={pinterestUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-terracotta"
+              >
+                Pinterest
+              </a>
+            ) : (
+              <span className="opacity-40">Pinterest</span>
+            )}
+            {journalEnabled ? (
+              <Link to="/journal" className="hover:text-terracotta">Journal</Link>
+            ) : (
+              <span className="opacity-40">Journal</span>
+            )}
           </div>
           <div className="flex flex-col gap-3">
             <span className="opacity-50">© {new Date().getFullYear()}</span>

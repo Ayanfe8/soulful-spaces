@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
+import { siteSettingsQueryOptions } from "@/lib/site-settings-data";
 import {
   TIME_SLOTS,
   SERVICES,
@@ -29,6 +31,7 @@ export const Route = createFileRoute("/book")({
       },
     ],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteSettingsQueryOptions()),
   component: BookPage,
 });
 
@@ -54,6 +57,7 @@ function startOfDay(d: Date) {
 }
 
 function BookPage() {
+  const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions());
   const today = useMemo(() => startOfDay(new Date()), []);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<TimeSlot | null>(null);
@@ -197,7 +201,7 @@ function BookPage() {
             </Link>
           </div>
         </main>
-        <SiteFooter />
+        <SiteFooter settings={settings} />
       </div>
     );
   }
@@ -386,7 +390,7 @@ function BookPage() {
           </div>
         </form>
       </main>
-      <SiteFooter />
+      <SiteFooter settings={settings} />
     </div>
   );
 }
