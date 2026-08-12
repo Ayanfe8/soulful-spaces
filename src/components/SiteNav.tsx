@@ -82,22 +82,8 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
             overlay ? "bg-charcoal text-bone" : "bg-bone text-charcoal"
           }`}
         >
-          <div className="flex flex-col h-full px-8 py-10">
-            <div className="flex justify-end">
-              <SheetClose asChild>
-                <button
-                  type="button"
-                  aria-label="Close menu"
-                  className={`p-2 -mr-2 transition-opacity hover:opacity-60 ${
-                    overlay ? "text-bone" : "text-charcoal"
-                  }`}
-                >
-                  <X className="h-6 w-6" />
-                </button>
-              </SheetClose>
-            </div>
-
-            <div className="flex flex-col gap-8 mt-12">
+          <div className="flex flex-col h-full px-8 py-20">
+            <div className="flex flex-col gap-8">
               {navLinks.map((link) => (
                 <SheetClose key={link.to} asChild>
                   <Link
