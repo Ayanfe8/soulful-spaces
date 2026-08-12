@@ -87,7 +87,7 @@ export function SiteFooter({ settings }: SiteFooterProps) {
               <span className="opacity-40">Pinterest</span>
             )}
             {journalEnabled ? (
-              <Link to="/journal" className="hover:text-terracotta">Journal</Link>
+              <a href="/journal" className="hover:text-terracotta">Journal</a>
             ) : (
               <span className="opacity-40">Journal</span>
             )}
