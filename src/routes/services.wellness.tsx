@@ -37,5 +37,6 @@ export const Route = createFileRoute("/services/wellness")({
 
 function WellnessRoute() {
   const { data } = useSuspenseQuery(serviceQueryOptions("wellness"));
-  return <ServicePage {...data} />;
+  const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions());
+  return <ServicePage {...data} settings={settings} />;
 }
