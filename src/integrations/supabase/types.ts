@@ -343,6 +343,45 @@ export type Database = {
         }
         Relationships: []
       }
+      site_settings: {
+        Row: {
+          contact_email: string | null
+          created_at: string
+          hero_headline: string | null
+          hero_subhead: string | null
+          id: string
+          instagram_url: string | null
+          journal_enabled: boolean
+          philosophy_quote: string | null
+          pinterest_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          contact_email?: string | null
+          created_at?: string
+          hero_headline?: string | null
+          hero_subhead?: string | null
+          id?: string
+          instagram_url?: string | null
+          journal_enabled?: boolean
+          philosophy_quote?: string | null
+          pinterest_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          contact_email?: string | null
+          created_at?: string
+          hero_headline?: string | null
+          hero_subhead?: string | null
+          id?: string
+          instagram_url?: string | null
+          journal_enabled?: boolean
+          philosophy_quote?: string | null
+          pinterest_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       testimonials: {
         Row: {
           author_detail: string | null
