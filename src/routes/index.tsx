@@ -90,7 +90,7 @@ function Index() {
   const { data } = useSuspenseQuery(homepageContentQueryOptions());
   const packages = data.packages;
   const faqs = data.faqs;
-  const featuredTestimonial = data.testimonials[0];
+  const philosophyQuote = data.settings?.philosophy_quote;
 
   return (
     <div className="bg-bone text-charcoal font-sans selection:bg-terracotta/20">
