@@ -4,6 +4,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { siteSettingsQueryOptions } from "@/lib/site-settings-data";
+import { portfolioQueryOptions } from "@/lib/portfolio-data";
 import p1 from "@/assets/portfolio-1.jpg";
 import p2 from "@/assets/portfolio-2.jpg";
 import p3 from "@/assets/portfolio-3.jpg";
@@ -22,22 +23,29 @@ interface Project {
   title: string;
   location: string;
   year: string;
-  category: Exclude<Category, "All">;
-  ratio: "tall" | "wide" | "square";
+  category: string;
+  ratio: string;
 }
 
-const projects: Project[] = [
-  { src: p1, title: "The Earth Residence", location: "Lagos, NG", year: "2024", category: "Residential", ratio: "tall" },
-  { src: p2, title: "Tableau No. 04", location: "Accra, GH", year: "2024", category: "Hospitality", ratio: "wide" },
-  { src: hero, title: "Villa Adobe", location: "Marrakech, MA", year: "2024", category: "Residential", ratio: "wide" },
-  { src: p3, title: "The Quiet Suite", location: "Cape Town, ZA", year: "2024", category: "Hospitality", ratio: "tall" },
-  { src: p4, title: "Sanctuary Niche", location: "Lagos, NG", year: "2023", category: "Wellness", ratio: "tall" },
-  { src: styling, title: "Object Study I", location: "Studio", year: "2023", category: "Detail", ratio: "tall" },
-  { src: p5, title: "The Salon Project", location: "Nairobi, KE", year: "2023", category: "Hospitality", ratio: "wide" },
-  { src: wellness, title: "The Arch Room", location: "Marrakech, MA", year: "2023", category: "Wellness", ratio: "tall" },
-  { src: p6, title: "Vessel Composition", location: "Studio", year: "2023", category: "Detail", ratio: "tall" },
-  { src: heritage, title: "The Heritage Corner", location: "Lagos, NG", year: "2022", category: "Residential", ratio: "tall" },
-];
+// Bundled fallbacks until images move to Storage (spec Section 6, step 3).
+const imageMap: Record<string, string> = {
+  "portfolio-1.jpg": p1,
+  "portfolio-2.jpg": p2,
+  "portfolio-3.jpg": p3,
+  "portfolio-4.jpg": p4,
+  "portfolio-5.jpg": p5,
+  "portfolio-6.jpg": p6,
+  "hero-interior.jpg": hero,
+  "service-styling.jpg": styling,
+  "service-wellness.jpg": wellness,
+  "service-heritage.jpg": heritage,
+};
+
+const resolveImage = (path: string | null) => {
+  if (!path) return p1;
+  if (path.startsWith("http")) return path;
+  return imageMap[path.split("/").pop() ?? ""] ?? p1;
+};
 
 const categories: Category[] = ["All", "Residential", "Hospitality", "Wellness", "Detail"];
 
@@ -58,14 +66,30 @@ export const Route = createFileRoute("/portfolio")({
       { property: "og:image", content: p2 },
     ],
   }),
-  loader: ({ context }) => context.queryClient.ensureQueryData(siteSettingsQueryOptions()),
+  loader: ({ context }) =>
+    Promise.all([
+      context.queryClient.ensureQueryData(siteSettingsQueryOptions()),
+      context.queryClient.ensureQueryData(portfolioQueryOptions()),
+    ]),
+  errorComponent: ({ error }) => <div role="alert" className="p-12">{error.message}</div>,
+  notFoundComponent: () => <div className="p-12">No projects found.</div>,
   component: PortfolioPage,
 });
 
 function PortfolioPage() {
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions());
+  const { data: rows } = useSuspenseQuery(portfolioQueryOptions());
   const [active, setActive] = useState<Category>("All");
   const [lightbox, setLightbox] = useState<Project | null>(null);
+
+  const projects: Project[] = rows.map((r) => ({
+    src: resolveImage(r.image_path),
+    title: r.title,
+    location: r.location ?? "",
+    year: r.year ?? "",
+    category: r.category,
+    ratio: r.ratio,
+  }));
 
   const filtered = active === "All" ? projects : projects.filter((p) => p.category === active);
 
