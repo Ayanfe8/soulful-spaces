@@ -63,6 +63,7 @@ export const Route = createFileRoute("/portfolio")({
 });
 
 function PortfolioPage() {
+  const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions());
   const [active, setActive] = useState<Category>("All");
   const [lightbox, setLightbox] = useState<Project | null>(null);
 
