@@ -7,7 +7,10 @@ const logo = logoAsset.url;
 type SiteSettingsRow = Database["public"]["Tables"]["site_settings"]["Row"];
 
 interface SiteFooterProps {
-  settings?: SiteSettingsRow | null;
+  settings?: Pick<
+    SiteSettingsRow,
+    "contact_email" | "instagram_url" | "pinterest_url" | "journal_enabled"
+  > | null;
 }
 
 export function SiteFooter({ settings }: SiteFooterProps) {
