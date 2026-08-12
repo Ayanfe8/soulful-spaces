@@ -2,11 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ServicePage } from "@/components/ServicePage";
 import { serviceQueryOptions } from "@/lib/services-data";
+import { siteSettingsQueryOptions } from "@/lib/site-settings-data";
 import heroImg from "@/assets/service-heritage.jpg";
 
 export const Route = createFileRoute("/services/heritage")({
   loader: ({ context }) =>
-    context.queryClient.ensureQueryData(serviceQueryOptions("heritage")),
+    Promise.all([
+      context.queryClient.ensureQueryData(serviceQueryOptions("heritage")),
+      context.queryClient.ensureQueryData(siteSettingsQueryOptions()),
+    ]),
   head: () => ({
     meta: [
       { title: "Modern Heritage — Habitat by Grayson" },
