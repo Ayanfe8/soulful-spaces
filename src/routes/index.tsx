@@ -251,7 +251,7 @@ function Index() {
             Why Habitat
           </span>
           <p className="font-serif text-3xl md:text-5xl leading-[1.15] italic font-light text-balance">
-            {featuredTestimonial ? `“${featuredTestimonial.quote}”` : null}
+            {philosophyQuote ? `“${philosophyQuote}”` : null}
 
           </p>
           <div className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-6 max-w-3xl mx-auto text-xs uppercase tracking-[0.2em] text-bone/70">
