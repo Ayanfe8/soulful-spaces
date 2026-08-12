@@ -57,6 +57,7 @@ function startOfDay(d: Date) {
 }
 
 function BookPage() {
+  const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions());
   const today = useMemo(() => startOfDay(new Date()), []);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<TimeSlot | null>(null);
