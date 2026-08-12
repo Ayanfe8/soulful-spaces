@@ -58,6 +58,7 @@ export const Route = createFileRoute("/portfolio")({
       { property: "og:image", content: p2 },
     ],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteSettingsQueryOptions()),
   component: PortfolioPage,
 });
 
