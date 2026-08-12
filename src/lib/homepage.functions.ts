@@ -12,7 +12,7 @@ export const getHomepageContent = createServerFn({ method: "GET" }).handler(asyn
     auth: { storage: undefined, persistSession: false, autoRefreshToken: false },
   });
 
-  const [packages, testimonials, faqs] = await Promise.all([
+  const [packages, testimonials, faqs, settings] = await Promise.all([
     supabasePublic
       .from("homepage_packages")
       .select("id, tag, title, body, wide, sort_order")
