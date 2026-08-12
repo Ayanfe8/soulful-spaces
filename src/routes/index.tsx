@@ -618,7 +618,7 @@ function Index() {
         </div>
       </section>
 
-      <SiteFooter />
+      <SiteFooter settings={settings} />
     </div>
   );
 }
