@@ -179,7 +179,7 @@ export function ServicePage(p: ServicePageProps) {
         </div>
       </section>
 
-      <SiteFooter />
+      <SiteFooter settings={p.settings} />
     </div>
   );
 }
