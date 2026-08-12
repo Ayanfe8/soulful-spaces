@@ -25,14 +25,22 @@ export const getHomepageContent = createServerFn({ method: "GET" }).handler(asyn
       .from("faq_items")
       .select("id, question, answer, sort_order")
       .order("sort_order", { ascending: true }),
+    supabasePublic
+      .from("site_settings")
+      .select(
+        "id, contact_email, instagram_url, pinterest_url, journal_enabled, hero_headline, hero_subhead, philosophy_quote",
+      )
+      .limit(1)
+      .maybeSingle(),
   ]);
 
-  const error = packages.error ?? testimonials.error ?? faqs.error;
+  const error = packages.error ?? testimonials.error ?? faqs.error ?? settings.error;
   if (error) throw new Error(error.message);
 
   return {
     packages: packages.data ?? [],
     testimonials: testimonials.data ?? [],
     faqs: faqs.data ?? [],
+    settings: settings.data ?? null,
   };
 });
