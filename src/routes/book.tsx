@@ -201,7 +201,7 @@ function BookPage() {
             </Link>
           </div>
         </main>
-        <SiteFooter />
+        <SiteFooter settings={settings} />
       </div>
     );
   }
