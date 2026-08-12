@@ -37,5 +37,6 @@ export const Route = createFileRoute("/services/heritage")({
 
 function HeritageRoute() {
   const { data } = useSuspenseQuery(serviceQueryOptions("heritage"));
-  return <ServicePage {...data} />;
+  const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions());
+  return <ServicePage {...data} settings={settings} />;
 }
