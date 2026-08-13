@@ -1,35 +1,9 @@
 import { queryOptions } from "@tanstack/react-query";
 import { getServiceBySlug } from "@/lib/services.functions";
-
-
-import heritageHero from "@/assets/service-heritage.jpg";
-import stylingHero from "@/assets/service-styling.jpg";
-import wellnessHero from "@/assets/service-wellness.jpg";
-import p1 from "@/assets/portfolio-1.jpg";
-import p2 from "@/assets/portfolio-2.jpg";
-import p3 from "@/assets/portfolio-3.jpg";
-import p4 from "@/assets/portfolio-4.jpg";
-import p5 from "@/assets/portfolio-5.jpg";
-import p6 from "@/assets/portfolio-6.jpg";
-
-// Maps DB image_path values to bundled asset URLs. Storage buckets are not
-// yet provisioned; until they are, images live in src/assets and are looked
-// up here so the CMS can store stable logical paths.
-const ASSET_MAP: Record<string, string> = {
-  "services/service-heritage.jpg": heritageHero,
-  "services/service-styling.jpg": stylingHero,
-  "services/service-wellness.jpg": wellnessHero,
-  "portfolio/portfolio-1.jpg": p1,
-  "portfolio/portfolio-2.jpg": p2,
-  "portfolio/portfolio-3.jpg": p3,
-  "portfolio/portfolio-4.jpg": p4,
-  "portfolio/portfolio-5.jpg": p5,
-  "portfolio/portfolio-6.jpg": p6,
-};
+import { storageImageUrl } from "@/lib/storage";
 
 export function resolveImagePath(path: string | null | undefined): string {
-  if (!path) return "";
-  return ASSET_MAP[path] ?? path;
+  return storageImageUrl(path);
 }
 
 export interface ServicePageData {

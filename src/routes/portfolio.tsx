@@ -5,16 +5,7 @@ import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { siteSettingsQueryOptions } from "@/lib/site-settings-data";
 import { portfolioQueryOptions } from "@/lib/portfolio-data";
-import p1 from "@/assets/portfolio-1.jpg";
-import p2 from "@/assets/portfolio-2.jpg";
-import p3 from "@/assets/portfolio-3.jpg";
-import p4 from "@/assets/portfolio-4.jpg";
-import p5 from "@/assets/portfolio-5.jpg";
-import p6 from "@/assets/portfolio-6.jpg";
-import hero from "@/assets/hero-interior.jpg";
-import styling from "@/assets/service-styling.jpg";
-import wellness from "@/assets/service-wellness.jpg";
-import heritage from "@/assets/service-heritage.jpg";
+import { storageImageUrl } from "@/lib/storage";
 
 type Category = "All" | "Residential" | "Hospitality" | "Wellness" | "Detail";
 
@@ -27,25 +18,7 @@ interface Project {
   ratio: string;
 }
 
-// Bundled fallbacks until images move to Storage (spec Section 6, step 3).
-const imageMap: Record<string, string> = {
-  "portfolio-1.jpg": p1,
-  "portfolio-2.jpg": p2,
-  "portfolio-3.jpg": p3,
-  "portfolio-4.jpg": p4,
-  "portfolio-5.jpg": p5,
-  "portfolio-6.jpg": p6,
-  "hero-interior.jpg": hero,
-  "service-styling.jpg": styling,
-  "service-wellness.jpg": wellness,
-  "service-heritage.jpg": heritage,
-};
-
-const resolveImage = (path: string | null) => {
-  if (!path) return p1;
-  if (path.startsWith("http")) return path;
-  return imageMap[path.split("/").pop() ?? ""] ?? p1;
-};
+const resolveImage = (path: string | null) => storageImageUrl(path);
 
 const categories: Category[] = ["All", "Residential", "Hospitality", "Wellness", "Detail"];
 
@@ -63,7 +36,8 @@ export const Route = createFileRoute("/portfolio")({
         property: "og:description",
         content: "Selected interiors. Residential, hospitality, and wellness work.",
       },
-      { property: "og:image", content: p2 },
+      { property: "og:image", content: storageImageUrl("portfolio/portfolio-2.jpg") },
+      { name: "twitter:image", content: storageImageUrl("portfolio/portfolio-2.jpg") },
     ],
   }),
   loader: ({ context }) =>
