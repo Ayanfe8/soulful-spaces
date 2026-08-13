@@ -36,7 +36,8 @@ export const Route = createFileRoute("/portfolio")({
         property: "og:description",
         content: "Selected interiors. Residential, hospitality, and wellness work.",
       },
-      { property: "og:image", content: p2 },
+      { property: "og:image", content: storageImageUrl("portfolio/portfolio-2.jpg") },
+      { name: "twitter:image", content: storageImageUrl("portfolio/portfolio-2.jpg") },
     ],
   }),
   loader: ({ context }) =>
