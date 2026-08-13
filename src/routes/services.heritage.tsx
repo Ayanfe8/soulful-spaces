@@ -3,7 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { ServicePage } from "@/components/ServicePage";
 import { serviceQueryOptions } from "@/lib/services-data";
 import { siteSettingsQueryOptions } from "@/lib/site-settings-data";
-import heroImg from "@/assets/service-heritage.jpg";
+import { storageImageUrl } from "@/lib/storage";
 
 export const Route = createFileRoute("/services/heritage")({
   loader: ({ context }) =>
@@ -25,7 +25,8 @@ export const Route = createFileRoute("/services/heritage")({
         content:
           "Interiors where contemporary global aesthetics meet the rich, soulful texture of African living.",
       },
-      { property: "og:image", content: heroImg },
+      { property: "og:image", content: storageImageUrl("services/service-heritage.jpg") },
+      { name: "twitter:image", content: storageImageUrl("services/service-heritage.jpg") },
     ],
   }),
   errorComponent: ({ error }) => (

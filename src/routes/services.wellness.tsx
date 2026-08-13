@@ -3,7 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { ServicePage } from "@/components/ServicePage";
 import { serviceQueryOptions } from "@/lib/services-data";
 import { siteSettingsQueryOptions } from "@/lib/site-settings-data";
-import heroImg from "@/assets/service-wellness.jpg";
+import { storageImageUrl } from "@/lib/storage";
 
 export const Route = createFileRoute("/services/wellness")({
   loader: ({ context }) =>
@@ -25,7 +25,8 @@ export const Route = createFileRoute("/services/wellness")({
         content:
           "Interiors that calm, heal, and energise. Designed around light, breath, and sustainable material.",
       },
-      { property: "og:image", content: heroImg },
+      { property: "og:image", content: storageImageUrl("services/service-wellness.jpg") },
+      { name: "twitter:image", content: storageImageUrl("services/service-wellness.jpg") },
     ],
   }),
   errorComponent: ({ error }) => (

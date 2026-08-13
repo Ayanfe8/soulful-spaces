@@ -3,7 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { ServicePage } from "@/components/ServicePage";
 import { serviceQueryOptions } from "@/lib/services-data";
 import { siteSettingsQueryOptions } from "@/lib/site-settings-data";
-import heroImg from "@/assets/service-styling.jpg";
+import { storageImageUrl } from "@/lib/storage";
 
 export const Route = createFileRoute("/services/styling")({
   loader: ({ context }) =>
@@ -25,7 +25,8 @@ export const Route = createFileRoute("/services/styling")({
         content:
           "Thoughtfully curated interiors designed around your lifestyle, personality, and the rhythm of how you live.",
       },
-      { property: "og:image", content: heroImg },
+      { property: "og:image", content: storageImageUrl("services/service-styling.jpg") },
+      { name: "twitter:image", content: storageImageUrl("services/service-styling.jpg") },
     ],
   }),
   errorComponent: ({ error }) => (
