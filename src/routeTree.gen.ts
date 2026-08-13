@@ -13,9 +13,11 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as BookRouteImport } from './routes/book'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as ServicesWellnessRouteImport } from './routes/services.wellness'
 import { Route as ServicesStylingRouteImport } from './routes/services.styling'
 import { Route as ServicesHeritageRouteImport } from './routes/services.heritage'
+import { Route as AdminLoginRouteImport } from './routes/admin/login'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -37,6 +39,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesWellnessRoute = ServicesWellnessRouteImport.update({
   id: '/services/wellness',
   path: '/services/wellness',
@@ -52,24 +59,33 @@ const ServicesHeritageRoute = ServicesHeritageRouteImport.update({
   path: '/services/heritage',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/book': typeof BookRoute
   '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/login': typeof AdminLoginRoute
   '/services/heritage': typeof ServicesHeritageRoute
   '/services/styling': typeof ServicesStylingRoute
   '/services/wellness': typeof ServicesWellnessRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/book': typeof BookRoute
   '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/login': typeof AdminLoginRoute
   '/services/heritage': typeof ServicesHeritageRoute
   '/services/styling': typeof ServicesStylingRoute
   '/services/wellness': typeof ServicesWellnessRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -77,9 +93,11 @@ export interface FileRoutesById {
   '/book': typeof BookRoute
   '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/login': typeof AdminLoginRoute
   '/services/heritage': typeof ServicesHeritageRoute
   '/services/styling': typeof ServicesStylingRoute
   '/services/wellness': typeof ServicesWellnessRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -88,27 +106,33 @@ export interface FileRouteTypes {
     | '/book'
     | '/portfolio'
     | '/sitemap.xml'
+    | '/admin/login'
     | '/services/heritage'
     | '/services/styling'
     | '/services/wellness'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/book'
     | '/portfolio'
     | '/sitemap.xml'
+    | '/admin/login'
     | '/services/heritage'
     | '/services/styling'
     | '/services/wellness'
+    | '/admin'
   id:
     | '__root__'
     | '/'
     | '/book'
     | '/portfolio'
     | '/sitemap.xml'
+    | '/admin/login'
     | '/services/heritage'
     | '/services/styling'
     | '/services/wellness'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -116,9 +140,11 @@ export interface RootRouteChildren {
   BookRoute: typeof BookRoute
   PortfolioRoute: typeof PortfolioRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  AdminLoginRoute: typeof AdminLoginRoute
   ServicesHeritageRoute: typeof ServicesHeritageRoute
   ServicesStylingRoute: typeof ServicesStylingRoute
   ServicesWellnessRoute: typeof ServicesWellnessRoute
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -151,6 +177,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/wellness': {
       id: '/services/wellness'
       path: '/services/wellness'
@@ -172,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesHeritageRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -180,9 +220,11 @@ const rootRouteChildren: RootRouteChildren = {
   BookRoute: BookRoute,
   PortfolioRoute: PortfolioRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  AdminLoginRoute: AdminLoginRoute,
   ServicesHeritageRoute: ServicesHeritageRoute,
   ServicesStylingRoute: ServicesStylingRoute,
   ServicesWellnessRoute: ServicesWellnessRoute,
+  AdminIndexRoute: AdminIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
