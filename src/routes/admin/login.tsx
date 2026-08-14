@@ -25,7 +25,28 @@ function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+
+  async function handleReset() {
+    const target = email.trim();
+    if (!target) {
+      setError("Enter your studio email first, then choose “Set / reset password”.");
+      return;
+    }
+    setBusy(true);
+    setError(null);
+    setNotice(null);
+    const { error: resetError } = await supabase.auth.resetPasswordForEmail(target, {
+      redirectTo: `${window.location.origin}/admin/reset-password`,
+    });
+    setBusy(false);
+    if (resetError) {
+      setError(resetError.message);
+      return;
+    }
+    setNotice(`If ${target} is a studio account, a password link is on its way.`);
+  }
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
