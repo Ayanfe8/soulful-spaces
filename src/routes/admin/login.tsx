@@ -113,6 +113,7 @@ function AdminLogin() {
           </div>
 
           {error ? <p className="text-sm text-destructive">{error}</p> : null}
+          {notice ? <p className="text-sm text-muted-foreground">{notice}</p> : null}
 
           <button
             type="submit"
@@ -120,6 +121,15 @@ function AdminLogin() {
             className="w-full bg-foreground px-6 py-3 text-xs uppercase tracking-[0.25em] text-background transition-opacity hover:opacity-90 disabled:opacity-50"
           >
             {busy ? "Signing in…" : "Sign in"}
+          </button>
+
+          <button
+            type="button"
+            onClick={handleReset}
+            disabled={busy}
+            className="w-full text-xs uppercase tracking-[0.2em] text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground disabled:opacity-50"
+          >
+            Set / reset password
           </button>
         </form>
       </div>
