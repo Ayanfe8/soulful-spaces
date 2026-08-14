@@ -17,6 +17,7 @@ import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as ServicesWellnessRouteImport } from './routes/services.wellness'
 import { Route as ServicesStylingRouteImport } from './routes/services.styling'
 import { Route as ServicesHeritageRouteImport } from './routes/services.heritage'
+import { Route as AdminResetPasswordRouteImport } from './routes/admin/reset-password'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -59,6 +60,11 @@ const ServicesHeritageRoute = ServicesHeritageRouteImport.update({
   path: '/services/heritage',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminResetPasswordRoute = AdminResetPasswordRouteImport.update({
+  id: '/admin/reset-password',
+  path: '/admin/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/admin/login',
   path: '/admin/login',
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/reset-password': typeof AdminResetPasswordRoute
   '/services/heritage': typeof ServicesHeritageRoute
   '/services/styling': typeof ServicesStylingRoute
   '/services/wellness': typeof ServicesWellnessRoute
@@ -82,6 +89,7 @@ export interface FileRoutesByTo {
   '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/reset-password': typeof AdminResetPasswordRoute
   '/services/heritage': typeof ServicesHeritageRoute
   '/services/styling': typeof ServicesStylingRoute
   '/services/wellness': typeof ServicesWellnessRoute
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/reset-password': typeof AdminResetPasswordRoute
   '/services/heritage': typeof ServicesHeritageRoute
   '/services/styling': typeof ServicesStylingRoute
   '/services/wellness': typeof ServicesWellnessRoute
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/sitemap.xml'
     | '/admin/login'
+    | '/admin/reset-password'
     | '/services/heritage'
     | '/services/styling'
     | '/services/wellness'
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/sitemap.xml'
     | '/admin/login'
+    | '/admin/reset-password'
     | '/services/heritage'
     | '/services/styling'
     | '/services/wellness'
@@ -129,6 +140,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/sitemap.xml'
     | '/admin/login'
+    | '/admin/reset-password'
     | '/services/heritage'
     | '/services/styling'
     | '/services/wellness'
@@ -141,6 +153,7 @@ export interface RootRouteChildren {
   PortfolioRoute: typeof PortfolioRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  AdminResetPasswordRoute: typeof AdminResetPasswordRoute
   ServicesHeritageRoute: typeof ServicesHeritageRoute
   ServicesStylingRoute: typeof ServicesStylingRoute
   ServicesWellnessRoute: typeof ServicesWellnessRoute
@@ -205,6 +218,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesHeritageRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/reset-password': {
+      id: '/admin/reset-password'
+      path: '/admin/reset-password'
+      fullPath: '/admin/reset-password'
+      preLoaderRoute: typeof AdminResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/login': {
       id: '/admin/login'
       path: '/admin/login'
@@ -221,6 +241,7 @@ const rootRouteChildren: RootRouteChildren = {
   PortfolioRoute: PortfolioRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   AdminLoginRoute: AdminLoginRoute,
+  AdminResetPasswordRoute: AdminResetPasswordRoute,
   ServicesHeritageRoute: ServicesHeritageRoute,
   ServicesStylingRoute: ServicesStylingRoute,
   ServicesWellnessRoute: ServicesWellnessRoute,

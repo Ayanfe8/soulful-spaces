@@ -25,7 +25,28 @@ function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+
+  async function handleReset() {
+    const target = email.trim();
+    if (!target) {
+      setError("Enter your studio email first, then choose “Set / reset password”.");
+      return;
+    }
+    setBusy(true);
+    setError(null);
+    setNotice(null);
+    const { error: resetError } = await supabase.auth.resetPasswordForEmail(target, {
+      redirectTo: `${window.location.origin}/admin/reset-password`,
+    });
+    setBusy(false);
+    if (resetError) {
+      setError(resetError.message);
+      return;
+    }
+    setNotice(`If ${target} is a studio account, a password link is on its way.`);
+  }
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -92,6 +113,7 @@ function AdminLogin() {
           </div>
 
           {error ? <p className="text-sm text-destructive">{error}</p> : null}
+          {notice ? <p className="text-sm text-muted-foreground">{notice}</p> : null}
 
           <button
             type="submit"
@@ -99,6 +121,15 @@ function AdminLogin() {
             className="w-full bg-foreground px-6 py-3 text-xs uppercase tracking-[0.25em] text-background transition-opacity hover:opacity-90 disabled:opacity-50"
           >
             {busy ? "Signing in…" : "Sign in"}
+          </button>
+
+          <button
+            type="button"
+            onClick={handleReset}
+            disabled={busy}
+            className="w-full text-xs uppercase tracking-[0.2em] text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground disabled:opacity-50"
+          >
+            Set / reset password
           </button>
         </form>
       </div>
