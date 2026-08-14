@@ -2,6 +2,8 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
+// Keep the studio sign-in client-rendered because its session lives in the browser.
+
 export const Route = createFileRoute("/admin/login")({
   ssr: false,
   head: () => ({
