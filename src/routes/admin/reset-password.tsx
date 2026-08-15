@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { getBrowserSupabase } from "@/lib/supabase-browser";
 
 // Recovery links land here; the session is created in the browser from the URL fragment.
 
@@ -29,10 +29,10 @@ function AdminResetPassword() {
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data } = (await getBrowserSupabase()).auth.onAuthStateChange((event, session) => {
       if (event === "PASSWORD_RECOVERY" || session) setReady(true);
     });
-    supabase.auth.getSession().then(({ data: sessionData }) => {
+    (await getBrowserSupabase()).auth.getSession().then(({ data: sessionData }) => {
       if (sessionData.session) setReady(true);
     });
     return () => data.subscription.unsubscribe();
@@ -46,7 +46,7 @@ function AdminResetPassword() {
     }
     setBusy(true);
     setError(null);
-    const { error: updateError } = await supabase.auth.updateUser({ password });
+    const { error: updateError } = await (await getBrowserSupabase()).auth.updateUser({ password });
     setBusy(false);
     if (updateError) {
       setError(updateError.message);

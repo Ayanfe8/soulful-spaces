@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { getBrowserSupabase } from "@/lib/supabase-browser";
 
 // Keep the studio sign-in client-rendered because its session lives in the browser.
 
@@ -37,7 +37,7 @@ function AdminLogin() {
     setBusy(true);
     setError(null);
     setNotice(null);
-    const { error: resetError } = await supabase.auth.resetPasswordForEmail(target, {
+    const { error: resetError } = await (await getBrowserSupabase()).auth.resetPasswordForEmail(target, {
       redirectTo: `${window.location.origin}/admin/reset-password`,
     });
     setBusy(false);
@@ -49,7 +49,7 @@ function AdminLogin() {
   }
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
+    (await getBrowserSupabase()).auth.getSession().then(({ data }) => {
       if (data.session) navigate({ to: "/admin", replace: true });
     });
   }, [navigate]);
@@ -58,7 +58,7 @@ function AdminLogin() {
     event.preventDefault();
     setBusy(true);
     setError(null);
-    const { error: signInError } = await supabase.auth.signInWithPassword({
+    const { error: signInError } = await (await getBrowserSupabase()).auth.signInWithPassword({
       email: email.trim(),
       password,
     });
