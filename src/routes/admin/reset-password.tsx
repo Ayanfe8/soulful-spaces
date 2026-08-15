@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { getBrowserSupabase } from "@/lib/supabase-browser";
 
 // Recovery links land here; the session is created in the browser from the URL fragment.
 
@@ -29,14 +29,24 @@ function AdminResetPassword() {
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === "PASSWORD_RECOVERY" || session) setReady(true);
-    });
-    supabase.auth.getSession().then(({ data: sessionData }) => {
-      if (sessionData.session) setReady(true);
-    });
-    return () => data.subscription.unsubscribe();
+    let unsubscribe: (() => void) | undefined;
+    let cancelled = false;
+    void (async () => {
+      const client = await getBrowserSupabase();
+      if (cancelled) return;
+      const { data } = client.auth.onAuthStateChange((event, session) => {
+        if (event === "PASSWORD_RECOVERY" || session) setReady(true);
+      });
+      unsubscribe = () => data.subscription.unsubscribe();
+      const { data: sessionData } = await client.auth.getSession();
+      if (!cancelled && sessionData.session) setReady(true);
+    })();
+    return () => {
+      cancelled = true;
+      unsubscribe?.();
+    };
   }, []);
+
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -46,7 +56,7 @@ function AdminResetPassword() {
     }
     setBusy(true);
     setError(null);
-    const { error: updateError } = await supabase.auth.updateUser({ password });
+    const { error: updateError } = await (await getBrowserSupabase()).auth.updateUser({ password });
     setBusy(false);
     if (updateError) {
       setError(updateError.message);
