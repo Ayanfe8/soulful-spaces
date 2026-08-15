@@ -49,10 +49,17 @@ function AdminLogin() {
   }
 
   useEffect(() => {
-    (await getBrowserSupabase()).auth.getSession().then(({ data }) => {
-      if (data.session) navigate({ to: "/admin", replace: true });
-    });
+    let cancelled = false;
+    void (async () => {
+      const client = await getBrowserSupabase();
+      const { data } = await client.auth.getSession();
+      if (!cancelled && data.session) navigate({ to: "/admin", replace: true });
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, [navigate]);
+
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
