@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { z } from "zod";
-import { supabase } from "@/integrations/supabase/client";
+import { getBrowserSupabase } from "@/lib/supabase-browser";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { siteSettingsQueryOptions } from "@/lib/site-settings-data";
@@ -95,7 +95,7 @@ function BookPage() {
     setSelectedTime(null);
     setLoadingSlots(true);
     const iso = toISODate(d);
-    const { data, error: rpcError } = await supabase.rpc("get_booked_slots", {
+    const { data, error: rpcError } = await (await getBrowserSupabase()).rpc("get_booked_slots", {
       target_date: iso,
     });
     if (rpcError) {
@@ -123,7 +123,7 @@ function BookPage() {
     setSubmitting(true);
     const iso = toISODate(selectedDate);
 
-    const { error: insertError } = await supabase.from("bookings").insert({
+    const { error: insertError } = await (await getBrowserSupabase()).from("bookings").insert({
       name: parsed.data.name,
       email: parsed.data.email,
       phone: parsed.data.phone || null,

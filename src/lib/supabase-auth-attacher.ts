@@ -15,8 +15,8 @@ export const attachSupabaseAuthSafe = createMiddleware({ type: "function" }).cli
   async ({ next }) => {
     let token: string | undefined;
     try {
-      const { supabase } = await import("@/integrations/supabase/client");
-      const { data } = await supabase.auth.getSession();
+      const { getBrowserSupabase } = await import("@/lib/supabase-browser");
+      const { data } = await (await getBrowserSupabase()).auth.getSession();
       token = data.session?.access_token;
     } catch (error) {
       console.warn("[auth] Skipping bearer token attachment:", error);

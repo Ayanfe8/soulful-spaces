@@ -1,6 +1,6 @@
 import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
+import { getBrowserSupabase } from "@/lib/supabase-browser";
 
 export const Route = createFileRoute("/admin/")({
   ssr: false,
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/admin/")({
     ],
   }),
   beforeLoad: async () => {
-    const { data, error } = await supabase.auth.getUser();
+    const { data, error } = await (await getBrowserSupabase()).auth.getUser();
     if (error || !data.user) throw redirect({ to: "/admin/login" });
     return { adminUser: data.user };
   },
@@ -31,7 +31,7 @@ function AdminDashboard() {
   async function handleSignOut() {
     await queryClient.cancelQueries();
     queryClient.clear();
-    await supabase.auth.signOut();
+    await (await getBrowserSupabase()).auth.signOut();
     navigate({ to: "/admin/login", replace: true });
   }
 
