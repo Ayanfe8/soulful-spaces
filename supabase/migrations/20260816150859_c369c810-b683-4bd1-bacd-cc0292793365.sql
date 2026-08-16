@@ -12,7 +12,7 @@ alter table private.app_config enable row level security;
 
 insert into private.app_config(key, value) values
   ('booking_email_url', 'https://project--a6d2510d-0cca-4ba9-941e-b9fe5e8eb13d.lovable.app/api/public/booking-email'),
-  ('booking_webhook_secret', '408c023ba1e11838db5d8758f976d80be0cfdefed32d68b07c249f8cb183dae4')
+  ('booking_webhook_secret', '__SET_OUT_OF_BAND__')
 on conflict (key) do update set value = excluded.value;
 
 create or replace function public.notify_booking_created()
