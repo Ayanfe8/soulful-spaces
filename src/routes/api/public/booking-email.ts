@@ -83,7 +83,7 @@ export const Route = createFileRoute("/api/public/booking-email")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const expected = process.env["BOOKING_WEBHOOK_SECRET"];
+        const expected = process.env["BOOKING_WEBHOOK_KEY"];
         const provided = request.headers.get("x-webhook-secret") ?? "";
         if (!expected || !timingSafeEqual(provided, expected)) {
           return new Response("Invalid signature", { status: 401 });
