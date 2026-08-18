@@ -1,0 +1,1 @@
+UPDATE private.app_config SET value = 'https://project--a6d2510d-0cca-4ba9-941e-b9fe5e8eb13d-dev.lovable.app/api/public/booking-email' WHERE key = 'booking_email_url';
