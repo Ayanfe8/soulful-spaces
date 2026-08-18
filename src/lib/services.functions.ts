@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import type { Database } from "@/integrations/supabase/types";
+import { timedFetch } from "@/lib/timeout-fetch";
 
 const SERVICE_SELECT = `
   slug, eyebrow, title, intro, hero_image_path, hero_alt, next_service_slug,
@@ -21,6 +22,7 @@ export const getServiceBySlug = createServerFn({ method: "GET" })
 
     const supabasePublic = createClient<Database>(url, key, {
       auth: { storage: undefined, persistSession: false, autoRefreshToken: false },
+      global: { fetch: timedFetch("services") },
     });
 
     const { data: service, error } = await supabasePublic
