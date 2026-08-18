@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
+import { timedFetch } from "@/lib/timeout-fetch";
 
 export const getPortfolioProjects = createServerFn({ method: "GET" }).handler(async () => {
   // Env is bound per-request on Workers — read it here, never at module scope.
@@ -10,6 +11,7 @@ export const getPortfolioProjects = createServerFn({ method: "GET" }).handler(as
 
   const supabasePublic = createClient<Database>(url, key, {
     auth: { storage: undefined, persistSession: false, autoRefreshToken: false },
+    global: { fetch: timedFetch("portfolio") },
   });
 
   const { data, error } = await supabasePublic
