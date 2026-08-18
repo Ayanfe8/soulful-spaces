@@ -4,7 +4,7 @@ type SiteSettingsPublic = {
   contact_email: string | null;
   instagram_url: string | null;
   pinterest_url: string | null;
-  journal_enabled: boolean | null;
+  journal_enabled: boolean;
 } | null;
 
 /**
