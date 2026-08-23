@@ -1,4 +1,4 @@
-import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, redirect, useNavigate, Link } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { getBrowserSupabase } from "@/lib/supabase-browser";
 
@@ -46,12 +46,20 @@ function AdminDashboard() {
           Signed in as <span className="text-foreground">{adminUser.email}</span>
         </p>
 
-        <button
-          onClick={handleSignOut}
-          className="mt-10 border border-border px-6 py-3 text-xs uppercase tracking-[0.25em] text-foreground transition-colors hover:bg-foreground hover:text-background"
-        >
-          Sign out
-        </button>
+        <div className="mt-10 flex flex-wrap items-center gap-4">
+          <Link
+            to="/admin/bookings"
+            className="border border-border px-6 py-3 text-xs uppercase tracking-[0.25em] text-foreground transition-colors hover:bg-foreground hover:text-background"
+          >
+            View bookings
+          </Link>
+          <button
+            onClick={handleSignOut}
+            className="border border-border px-6 py-3 text-xs uppercase tracking-[0.25em] text-foreground transition-colors hover:bg-foreground hover:text-background"
+          >
+            Sign out
+          </button>
+        </div>
       </div>
     </main>
   );

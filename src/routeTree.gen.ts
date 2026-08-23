@@ -19,6 +19,7 @@ import { Route as ServicesStylingRouteImport } from './routes/services.styling'
 import { Route as ServicesHeritageRouteImport } from './routes/services.heritage'
 import { Route as AdminResetPasswordRouteImport } from './routes/admin/reset-password'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
+import { Route as AdminBookingsRouteImport } from './routes/admin/bookings'
 import { Route as ApiPublicBookingEmailRouteImport } from './routes/api/public/booking-email'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -71,6 +72,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminBookingsRoute = AdminBookingsRouteImport.update({
+  id: '/admin/bookings',
+  path: '/admin/bookings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicBookingEmailRoute = ApiPublicBookingEmailRouteImport.update({
   id: '/api/public/booking-email',
   path: '/api/public/booking-email',
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/book': typeof BookRoute
   '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/bookings': typeof AdminBookingsRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/reset-password': typeof AdminResetPasswordRoute
   '/services/heritage': typeof ServicesHeritageRoute
@@ -95,6 +102,7 @@ export interface FileRoutesByTo {
   '/book': typeof BookRoute
   '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/bookings': typeof AdminBookingsRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/reset-password': typeof AdminResetPasswordRoute
   '/services/heritage': typeof ServicesHeritageRoute
@@ -109,6 +117,7 @@ export interface FileRoutesById {
   '/book': typeof BookRoute
   '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/bookings': typeof AdminBookingsRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/reset-password': typeof AdminResetPasswordRoute
   '/services/heritage': typeof ServicesHeritageRoute
@@ -124,6 +133,7 @@ export interface FileRouteTypes {
     | '/book'
     | '/portfolio'
     | '/sitemap.xml'
+    | '/admin/bookings'
     | '/admin/login'
     | '/admin/reset-password'
     | '/services/heritage'
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
     | '/book'
     | '/portfolio'
     | '/sitemap.xml'
+    | '/admin/bookings'
     | '/admin/login'
     | '/admin/reset-password'
     | '/services/heritage'
@@ -150,6 +161,7 @@ export interface FileRouteTypes {
     | '/book'
     | '/portfolio'
     | '/sitemap.xml'
+    | '/admin/bookings'
     | '/admin/login'
     | '/admin/reset-password'
     | '/services/heritage'
@@ -164,6 +176,7 @@ export interface RootRouteChildren {
   BookRoute: typeof BookRoute
   PortfolioRoute: typeof PortfolioRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  AdminBookingsRoute: typeof AdminBookingsRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminResetPasswordRoute: typeof AdminResetPasswordRoute
   ServicesHeritageRoute: typeof ServicesHeritageRoute
@@ -245,6 +258,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/bookings': {
+      id: '/admin/bookings'
+      path: '/admin/bookings'
+      fullPath: '/admin/bookings'
+      preLoaderRoute: typeof AdminBookingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/booking-email': {
       id: '/api/public/booking-email'
       path: '/api/public/booking-email'
@@ -260,6 +280,7 @@ const rootRouteChildren: RootRouteChildren = {
   BookRoute: BookRoute,
   PortfolioRoute: PortfolioRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  AdminBookingsRoute: AdminBookingsRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminResetPasswordRoute: AdminResetPasswordRoute,
   ServicesHeritageRoute: ServicesHeritageRoute,
