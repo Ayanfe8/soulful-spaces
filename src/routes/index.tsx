@@ -16,6 +16,7 @@ import p2 from "@/assets/portfolio-2.jpg";
 import p3 from "@/assets/portfolio-3.jpg";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { homepageContentQueryOptions } from "@/lib/homepage-data";
+import { ContentUnavailable } from "@/components/ContentUnavailable";
 
 
 export const Route = createFileRoute("/")({
@@ -88,6 +89,7 @@ const experienceRow2 = ["Identity", "Refined", "Heritage", "Home"];
 
 function Index() {
   const { data } = useSuspenseQuery(homepageContentQueryOptions());
+  if (data.degraded) return <ContentUnavailable section="page" />;
   const packages = data.packages;
   const faqs = data.faqs;
   const settings = data.settings;
