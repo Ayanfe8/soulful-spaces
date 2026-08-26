@@ -1,8 +1,25 @@
 import { queryOptions } from "@tanstack/react-query";
 import { getHomepageContent } from "./homepage.functions";
+import { degradeOnFailure } from "./degrade";
+
+type HomepageContent = Awaited<ReturnType<typeof getHomepageContent>>;
+export type HomepageResult = HomepageContent & { degraded: boolean };
+
+const FALLBACK: HomepageResult = {
+  packages: [],
+  testimonials: [],
+  faqs: [],
+  settings: null,
+  degraded: true,
+};
 
 export const homepageContentQueryOptions = () =>
   queryOptions({
     queryKey: ["homepage-content"],
-    queryFn: () => getHomepageContent(),
+    queryFn: (): Promise<HomepageResult> =>
+      degradeOnFailure(
+        "homepage",
+        async () => ({ ...(await getHomepageContent()), degraded: false }),
+        FALLBACK,
+      ),
   });
