@@ -1,6 +1,7 @@
 import { queryOptions } from "@tanstack/react-query";
 import { getServiceBySlug } from "@/lib/services.functions";
 import { storageImageUrl } from "@/lib/storage";
+import { degradeOnFailure } from "@/lib/degrade";
 
 export function resolveImagePath(path: string | null | undefined): string {
   return storageImageUrl(path);
@@ -67,8 +68,15 @@ async function fetchServiceBySlug(slug: string): Promise<ServicePageData> {
   };
 }
 
+export type ServiceResult = { service: ServicePageData | null; degraded: boolean };
+
 export const serviceQueryOptions = (slug: string) =>
   queryOptions({
     queryKey: ["service", slug],
-    queryFn: () => fetchServiceBySlug(slug),
+    queryFn: (): Promise<ServiceResult> =>
+      degradeOnFailure(
+        `service:${slug}`,
+        async () => ({ service: await fetchServiceBySlug(slug), degraded: false }),
+        { service: null, degraded: true },
+      ),
   });
