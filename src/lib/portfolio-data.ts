@@ -9,7 +9,7 @@ export const portfolioQueryOptions = () =>
   queryOptions({
     queryKey: ["portfolio-projects"],
     queryFn: (): Promise<PortfolioResult> =>
-      degradeOnFailure(
+      degradeOnFailure<PortfolioResult>(
         "portfolio",
         async () => ({ projects: await getPortfolioProjects(), degraded: false }),
         { projects: [], degraded: true },

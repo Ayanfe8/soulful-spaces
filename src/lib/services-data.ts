@@ -74,7 +74,7 @@ export const serviceQueryOptions = (slug: string) =>
   queryOptions({
     queryKey: ["service", slug],
     queryFn: (): Promise<ServiceResult> =>
-      degradeOnFailure(
+      degradeOnFailure<ServiceResult>(
         `service:${slug}`,
         async () => ({ service: await fetchServiceBySlug(slug), degraded: false }),
         { service: null, degraded: true },
