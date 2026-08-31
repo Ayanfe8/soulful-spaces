@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ServicePage } from "@/components/ServicePage";
+import { ContentUnavailable } from "@/components/ContentUnavailable";
 import { serviceQueryOptions } from "@/lib/services-data";
 import { siteSettingsQueryOptions } from "@/lib/site-settings-data";
 import { storageImageUrl } from "@/lib/storage";
@@ -39,5 +40,6 @@ export const Route = createFileRoute("/services/heritage")({
 function HeritageRoute() {
   const { data } = useSuspenseQuery(serviceQueryOptions("heritage"));
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions());
-  return <ServicePage {...data} settings={settings} />;
+  if (data.degraded || !data.service) return <ContentUnavailable section="service page" />;
+  return <ServicePage {...data.service} settings={settings} />;
 }

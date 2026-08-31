@@ -109,7 +109,7 @@ export const Route = createFileRoute("/api/public/booking-email")({
           .maybeSingle();
         const studioInbox = settings?.contact_email ?? null;
 
-        const from = "Habitat by Grayson <onboarding@resend.dev>";
+        const from = "Habitat by Grayson <soulful_spaces@habitatbygrayson.com>";
         const serviceLabel = SERVICE_LABELS[b.service] ?? b.service;
         const when = `${formatDate(b.booking_date)} at ${formatTime(b.booking_time)}`;
 

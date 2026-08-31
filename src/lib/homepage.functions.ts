@@ -1,48 +1,61 @@
-import { createServerFn } from "@tanstack/react-start";
-import { createClient } from "@supabase/supabase-js";
-import type { Database } from "@/integrations/supabase/types";
-import { timedFetch } from "@/lib/timeout-fetch";
+import { restSelect } from "@/lib/public-supabase";
 
-export const getHomepageContent = createServerFn({ method: "GET" }).handler(async () => {
-  // Env is bound per-request on Workers — read it here, never at module scope.
-  const url = process.env["SUPABASE_URL"];
-  const key = process.env["SUPABASE_PUBLISHABLE_KEY"];
-  if (!url || !key) throw new Error("Supabase server environment is not configured.");
+export type HomepagePackage = {
+  id: string;
+  tag: string | null;
+  title: string;
+  body: string | null;
+  wide: boolean | null;
+  sort_order: number;
+};
+export type Testimonial = {
+  id: string;
+  quote: string;
+  author_name: string | null;
+  author_detail: string | null;
+  sort_order: number;
+};
+export type FaqItem = {
+  id: string;
+  question: string;
+  answer: string;
+  sort_order: number;
+};
+export type SiteSettingsRow = {
+  id: string;
+  contact_email: string | null;
+  instagram_url: string | null;
+  pinterest_url: string | null;
+  journal_enabled: boolean;
+  hero_headline: string | null;
+  hero_subhead: string | null;
+  philosophy_quote: string | null;
+};
 
-  const supabasePublic = createClient<Database>(url, key, {
-    auth: { storage: undefined, persistSession: false, autoRefreshToken: false },
-    global: { fetch: timedFetch("homepage") },
-  });
-
+export async function getHomepageContent() {
   const [packages, testimonials, faqs, settings] = await Promise.all([
-    supabasePublic
-      .from("homepage_packages")
-      .select("id, tag, title, body, wide, sort_order")
-      .order("sort_order", { ascending: true }),
-    supabasePublic
-      .from("testimonials")
-      .select("id, quote, author_name, author_detail, sort_order")
-      .order("sort_order", { ascending: true }),
-    supabasePublic
-      .from("faq_items")
-      .select("id, question, answer, sort_order")
-      .order("sort_order", { ascending: true }),
-    supabasePublic
-      .from("site_settings")
-      .select(
-        "id, contact_email, instagram_url, pinterest_url, journal_enabled, hero_headline, hero_subhead, philosophy_quote",
-      )
-      .limit(1)
-      .maybeSingle(),
+    restSelect<HomepagePackage>(
+      "homepage:packages",
+      "homepage_packages?select=id,tag,title,body,wide,sort_order&order=sort_order.asc",
+    ),
+    restSelect<Testimonial>(
+      "homepage:testimonials",
+      "testimonials?select=id,quote,author_name,author_detail,sort_order&order=sort_order.asc",
+    ),
+    restSelect<FaqItem>(
+      "homepage:faqs",
+      "faq_items?select=id,question,answer,sort_order&order=sort_order.asc",
+    ),
+    restSelect<SiteSettingsRow>(
+      "homepage:settings",
+      "site_settings?select=id,contact_email,instagram_url,pinterest_url,journal_enabled,hero_headline,hero_subhead,philosophy_quote&limit=1",
+    ),
   ]);
 
-  const error = packages.error ?? testimonials.error ?? faqs.error ?? settings.error;
-  if (error) throw new Error(error.message);
-
   return {
-    packages: packages.data ?? [],
-    testimonials: testimonials.data ?? [],
-    faqs: faqs.data ?? [],
-    settings: settings.data ?? null,
+    packages,
+    testimonials,
+    faqs,
+    settings: settings[0] ?? null,
   };
-});
+}

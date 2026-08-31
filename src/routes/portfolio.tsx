@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { siteSettingsQueryOptions } from "@/lib/site-settings-data";
 import { portfolioQueryOptions } from "@/lib/portfolio-data";
 import { storageImageUrl } from "@/lib/storage";
+import { ContentUnavailable } from "@/components/ContentUnavailable";
 
 type Category = "All" | "Residential" | "Hospitality" | "Wellness" | "Detail";
 
@@ -52,11 +53,11 @@ export const Route = createFileRoute("/portfolio")({
 
 function PortfolioPage() {
   const { data: settings } = useSuspenseQuery(siteSettingsQueryOptions());
-  const { data: rows } = useSuspenseQuery(portfolioQueryOptions());
+  const { data: portfolio } = useSuspenseQuery(portfolioQueryOptions());
   const [active, setActive] = useState<Category>("All");
   const [lightbox, setLightbox] = useState<Project | null>(null);
 
-  const projects: Project[] = rows.map((r) => ({
+  const projects: Project[] = portfolio.projects.map((r) => ({
     src: resolveImage(r.image_path),
     title: r.title,
     location: r.location ?? "",
@@ -64,6 +65,8 @@ function PortfolioPage() {
     category: r.category,
     ratio: r.ratio,
   }));
+
+  if (portfolio.degraded) return <ContentUnavailable section="portfolio" />;
 
   const filtered = active === "All" ? projects : projects.filter((p) => p.category === active);
 
