@@ -20,7 +20,6 @@ import { Route as ServicesHeritageRouteImport } from './routes/services.heritage
 import { Route as AdminResetPasswordRouteImport } from './routes/admin/reset-password'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminBookingsRouteImport } from './routes/admin/bookings'
-import { Route as ApiPublicNetDiagRouteImport } from './routes/api/public/net-diag'
 import { Route as ApiPublicBookingEmailRouteImport } from './routes/api/public/booking-email'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -78,11 +77,6 @@ const AdminBookingsRoute = AdminBookingsRouteImport.update({
   path: '/admin/bookings',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicNetDiagRoute = ApiPublicNetDiagRouteImport.update({
-  id: '/api/public/net-diag',
-  path: '/api/public/net-diag',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ApiPublicBookingEmailRoute = ApiPublicBookingEmailRouteImport.update({
   id: '/api/public/booking-email',
   path: '/api/public/booking-email',
@@ -102,7 +96,6 @@ export interface FileRoutesByFullPath {
   '/services/wellness': typeof ServicesWellnessRoute
   '/admin/': typeof AdminIndexRoute
   '/api/public/booking-email': typeof ApiPublicBookingEmailRoute
-  '/api/public/net-diag': typeof ApiPublicNetDiagRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -117,7 +110,6 @@ export interface FileRoutesByTo {
   '/services/wellness': typeof ServicesWellnessRoute
   '/admin': typeof AdminIndexRoute
   '/api/public/booking-email': typeof ApiPublicBookingEmailRoute
-  '/api/public/net-diag': typeof ApiPublicNetDiagRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -133,7 +125,6 @@ export interface FileRoutesById {
   '/services/wellness': typeof ServicesWellnessRoute
   '/admin/': typeof AdminIndexRoute
   '/api/public/booking-email': typeof ApiPublicBookingEmailRoute
-  '/api/public/net-diag': typeof ApiPublicNetDiagRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -150,7 +141,6 @@ export interface FileRouteTypes {
     | '/services/wellness'
     | '/admin/'
     | '/api/public/booking-email'
-    | '/api/public/net-diag'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -165,7 +155,6 @@ export interface FileRouteTypes {
     | '/services/wellness'
     | '/admin'
     | '/api/public/booking-email'
-    | '/api/public/net-diag'
   id:
     | '__root__'
     | '/'
@@ -180,7 +169,6 @@ export interface FileRouteTypes {
     | '/services/wellness'
     | '/admin/'
     | '/api/public/booking-email'
-    | '/api/public/net-diag'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -196,7 +184,6 @@ export interface RootRouteChildren {
   ServicesWellnessRoute: typeof ServicesWellnessRoute
   AdminIndexRoute: typeof AdminIndexRoute
   ApiPublicBookingEmailRoute: typeof ApiPublicBookingEmailRoute
-  ApiPublicNetDiagRoute: typeof ApiPublicNetDiagRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -278,13 +265,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminBookingsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/net-diag': {
-      id: '/api/public/net-diag'
-      path: '/api/public/net-diag'
-      fullPath: '/api/public/net-diag'
-      preLoaderRoute: typeof ApiPublicNetDiagRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/public/booking-email': {
       id: '/api/public/booking-email'
       path: '/api/public/booking-email'
@@ -308,7 +288,6 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesWellnessRoute: ServicesWellnessRoute,
   AdminIndexRoute: AdminIndexRoute,
   ApiPublicBookingEmailRoute: ApiPublicBookingEmailRoute,
-  ApiPublicNetDiagRoute: ApiPublicNetDiagRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
