@@ -8,9 +8,13 @@
  * browser, and is bounded by an explicit abort timeout.
  */
 
+import { getPublicSupabaseConfig } from "@/lib/public-config.functions";
+
 const FALLBACK_URL = "https://rrybhxqsayenioprikon.supabase.co";
 
-function readEnv(): { url: string; key: string } {
+let browserConfigPromise: Promise<{ url: string; key: string }> | undefined;
+
+async function readEnv(): Promise<{ url: string; key: string }> {
   const url =
     (import.meta.env?.VITE_SUPABASE_URL as string | undefined) ||
     (typeof process !== "undefined" ? process.env?.["SUPABASE_URL"] : undefined) ||
@@ -19,8 +23,22 @@ function readEnv(): { url: string; key: string } {
     (import.meta.env?.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined) ||
     (typeof process !== "undefined" ? process.env?.["SUPABASE_PUBLISHABLE_KEY"] : undefined) ||
     "";
-  if (!key) throw new Error("Supabase publishable key is unavailable.");
-  return { url: url.replace(/\/+$/, ""), key };
+  if (key) return { url: url.replace(/\/+$/, ""), key };
+
+  if (typeof window === "undefined") {
+    throw new Error("Supabase publishable key is unavailable on the server.");
+  }
+
+  browserConfigPromise ??= getPublicSupabaseConfig().then((config) => {
+    if (!config.url || !config.publishableKey) {
+      throw new Error("Supabase publishable configuration is unavailable.");
+    }
+    return {
+      url: config.url.replace(/\/+$/, ""),
+      key: config.publishableKey,
+    };
+  });
+  return browserConfigPromise;
 }
 
 export async function restSelect<T>(
@@ -28,7 +46,7 @@ export async function restSelect<T>(
   path: string,
   timeoutMs = 8000,
 ): Promise<T[]> {
-  const { url, key } = readEnv();
+  const { url, key } = await readEnv();
   const started = Date.now();
   try {
     const response = await fetch(`${url}/rest/v1/${path}`, {
