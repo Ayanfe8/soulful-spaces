@@ -1,8 +1,9 @@
-const SUPABASE_URL =
-  import.meta.env.VITE_SUPABASE_URL ??
-  "https://rrybhxqsayenioprikon.supabase.co";
+import { readPublicConfigSync } from "@/lib/public-config";
+
+const FALLBACK_URL = "https://rrybhxqsayenioprikon.supabase.co";
 
 const BUCKET = "content-images";
+
 
 /**
  * Resolves a CMS image_path (e.g. "portfolio/portfolio-1.jpg") to a public
