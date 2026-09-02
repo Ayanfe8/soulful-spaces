@@ -20,6 +20,7 @@ import { Route as ServicesHeritageRouteImport } from './routes/services.heritage
 import { Route as AdminResetPasswordRouteImport } from './routes/admin/reset-password'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminBookingsRouteImport } from './routes/admin/bookings'
+import { Route as ApiPublicConfigRouteImport } from './routes/api/public/config'
 import { Route as ApiPublicBookingEmailRouteImport } from './routes/api/public/booking-email'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -77,6 +78,11 @@ const AdminBookingsRoute = AdminBookingsRouteImport.update({
   path: '/admin/bookings',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicConfigRoute = ApiPublicConfigRouteImport.update({
+  id: '/api/public/config',
+  path: '/api/public/config',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicBookingEmailRoute = ApiPublicBookingEmailRouteImport.update({
   id: '/api/public/booking-email',
   path: '/api/public/booking-email',
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/services/wellness': typeof ServicesWellnessRoute
   '/admin/': typeof AdminIndexRoute
   '/api/public/booking-email': typeof ApiPublicBookingEmailRoute
+  '/api/public/config': typeof ApiPublicConfigRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/services/wellness': typeof ServicesWellnessRoute
   '/admin': typeof AdminIndexRoute
   '/api/public/booking-email': typeof ApiPublicBookingEmailRoute
+  '/api/public/config': typeof ApiPublicConfigRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -125,6 +133,7 @@ export interface FileRoutesById {
   '/services/wellness': typeof ServicesWellnessRoute
   '/admin/': typeof AdminIndexRoute
   '/api/public/booking-email': typeof ApiPublicBookingEmailRoute
+  '/api/public/config': typeof ApiPublicConfigRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -141,6 +150,7 @@ export interface FileRouteTypes {
     | '/services/wellness'
     | '/admin/'
     | '/api/public/booking-email'
+    | '/api/public/config'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -155,6 +165,7 @@ export interface FileRouteTypes {
     | '/services/wellness'
     | '/admin'
     | '/api/public/booking-email'
+    | '/api/public/config'
   id:
     | '__root__'
     | '/'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
     | '/services/wellness'
     | '/admin/'
     | '/api/public/booking-email'
+    | '/api/public/config'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -184,6 +196,7 @@ export interface RootRouteChildren {
   ServicesWellnessRoute: typeof ServicesWellnessRoute
   AdminIndexRoute: typeof AdminIndexRoute
   ApiPublicBookingEmailRoute: typeof ApiPublicBookingEmailRoute
+  ApiPublicConfigRoute: typeof ApiPublicConfigRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -265,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminBookingsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/config': {
+      id: '/api/public/config'
+      path: '/api/public/config'
+      fullPath: '/api/public/config'
+      preLoaderRoute: typeof ApiPublicConfigRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/booking-email': {
       id: '/api/public/booking-email'
       path: '/api/public/booking-email'
@@ -288,6 +308,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesWellnessRoute: ServicesWellnessRoute,
   AdminIndexRoute: AdminIndexRoute,
   ApiPublicBookingEmailRoute: ApiPublicBookingEmailRoute,
+  ApiPublicConfigRoute: ApiPublicConfigRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

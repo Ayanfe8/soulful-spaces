@@ -72,25 +72,46 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+function publicConfigScript() {
+  // Server-only: bake the publishable Supabase config into the HTML so the
+  // browser never has to fetch it (and never blocks a content query on it).
+  if (typeof window !== "undefined") return [];
+  const url = process.env["SUPABASE_URL"] ?? "";
+  const key = process.env["SUPABASE_PUBLISHABLE_KEY"] ?? "";
+  if (!url || !key) return [];
+  return [
+    {
+      children: `window.__SB_PUBLIC__=${JSON.stringify({ url, key })}`,
+    },
+  ];
+}
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Habitat by Grayson — Spaces That Tell Your Story" },
+      {
+        name: "description",
+        content:
+          "Habitat by Grayson designs soulful, intentional interiors — modern African lifestyle, wellness-led and sustainably luxurious.",
+      },
+      { property: "og:title", content: "Habitat by Grayson" },
+      {
+        property: "og:description",
+        content: "Soulful, intentional interiors — spaces that tell your story.",
+      },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", type: "image/jpeg", href: "/favicon.jpg" },
     ],
+    scripts: publicConfigScript(),
   }),
+
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,

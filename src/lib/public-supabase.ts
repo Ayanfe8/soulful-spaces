@@ -8,27 +8,15 @@
  * browser, and is bounded by an explicit abort timeout.
  */
 
-const FALLBACK_URL = "https://rrybhxqsayenioprikon.supabase.co";
-
-function readEnv(): { url: string; key: string } {
-  const url =
-    (import.meta.env?.VITE_SUPABASE_URL as string | undefined) ||
-    (typeof process !== "undefined" ? process.env?.["SUPABASE_URL"] : undefined) ||
-    FALLBACK_URL;
-  const key =
-    (import.meta.env?.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined) ||
-    (typeof process !== "undefined" ? process.env?.["SUPABASE_PUBLISHABLE_KEY"] : undefined) ||
-    "";
-  if (!key) throw new Error("Supabase publishable key is unavailable.");
-  return { url: url.replace(/\/+$/, ""), key };
-}
+import { resolvePublicConfig } from "@/lib/public-config";
 
 export async function restSelect<T>(
   label: string,
   path: string,
   timeoutMs = 8000,
 ): Promise<T[]> {
-  const { url, key } = readEnv();
+  const { url, key } = await resolvePublicConfig();
+
   const started = Date.now();
   try {
     const response = await fetch(`${url}/rest/v1/${path}`, {
