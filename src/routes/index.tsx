@@ -418,40 +418,6 @@ function Index() {
         </div>
       </section>
 
-      {/* Founding Client Offer */}
-      <section className="py-32 md:py-40 px-6 md:px-12 bg-terracotta text-bone">
-        <div className="max-w-5xl mx-auto text-center">
-          <span className="uppercase tracking-[0.3em] text-[11px] text-bone/70 mb-8 block">
-            Founding Client Programme — Limited Spaces
-          </span>
-          <h2 className="font-serif text-4xl md:text-6xl font-light leading-[1.1] text-balance max-w-[22ch] mx-auto">
-            We are currently accepting a limited number of founding clients for our first Habitat
-            transformations.
-          </h2>
-          <p className="mt-10 text-bone/85 leading-relaxed max-w-[58ch] mx-auto text-lg">
-            Founding clients receive a more intimate styling experience, special introductory
-            pricing, and the opportunity to be part of Habitat by Grayson's first documented
-            transformations — the projects that will shape the brand's story.
-          </p>
-          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              to="/book"
-              className="inline-block px-10 py-5 bg-bone text-charcoal uppercase tracking-[0.25em] text-xs hover:bg-charcoal hover:text-bone transition-colors"
-            >
-              Become a Founding Client
-            </Link>
-            <a
-              href="https://wa.me/2340000000000"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-block px-8 py-5 border border-bone/50 text-bone uppercase tracking-[0.25em] text-xs hover:bg-bone/10 transition-colors"
-            >
-              Chat on WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* Portfolio — The Habitat Moodboard preview */}
       <section id="moodboard" className="py-32 md:py-40 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
