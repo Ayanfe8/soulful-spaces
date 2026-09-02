@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
+import { BackToTop } from "@/components/BackToTop";
 import {
   Accordion,
   AccordionContent,
@@ -585,6 +586,7 @@ function Index() {
       </section>
 
       <SiteFooter settings={settings} />
+      <BackToTop />
     </div>
   );
 }
