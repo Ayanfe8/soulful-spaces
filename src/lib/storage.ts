@@ -1,8 +1,9 @@
-const SUPABASE_URL =
-  import.meta.env.VITE_SUPABASE_URL ??
-  "https://rrybhxqsayenioprikon.supabase.co";
+import { readPublicConfigSync } from "@/lib/public-config";
+
+const FALLBACK_URL = "https://rrybhxqsayenioprikon.supabase.co";
 
 const BUCKET = "content-images";
+
 
 /**
  * Resolves a CMS image_path (e.g. "portfolio/portfolio-1.jpg") to a public
@@ -12,5 +13,6 @@ export function storageImageUrl(path: string | null | undefined): string {
   if (!path) return "";
   if (path.startsWith("http")) return path;
   const clean = path.replace(/^\/+/, "");
-  return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${clean}`;
+  const base = readPublicConfigSync()?.url ?? FALLBACK_URL;
+  return `${base}/storage/v1/object/public/${BUCKET}/${clean}`;
 }
