@@ -26,8 +26,8 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
     <nav
       className={
         overlay
-          ? "fixed top-0 w-full z-50 px-6 py-6 md:px-12 flex justify-between items-center mix-blend-difference"
-          : "sticky top-0 w-full z-50 px-6 py-5 md:px-12 flex justify-between items-center bg-bone/85 backdrop-blur-md border-b border-charcoal/5"
+          ? "fixed top-0 w-full z-50 px-6 py-5 md:px-12 flex justify-between items-center bg-bone border-b border-charcoal/10 shadow-sm"
+          : "sticky top-0 w-full z-50 px-6 py-5 md:px-12 flex justify-between items-center bg-bone border-b border-charcoal/10 shadow-sm"
       }
     >
       <Link to="/" className="flex items-center">
