@@ -203,6 +203,7 @@ function BookPage() {
           </div>
         </main>
         <SiteFooter settings={settings} />
+        <BackToTop />
       </div>
     );
   }
@@ -392,6 +393,7 @@ function BookPage() {
         </form>
       </main>
       <SiteFooter settings={settings} />
+      <BackToTop />
     </div>
   );
 }
