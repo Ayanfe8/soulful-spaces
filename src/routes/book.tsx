@@ -5,6 +5,7 @@ import { z } from "zod";
 import { getBrowserSupabase } from "@/lib/supabase-browser";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
+import { BackToTop } from "@/components/BackToTop";
 import { siteSettingsQueryOptions } from "@/lib/site-settings-data";
 import {
   TIME_SLOTS,
@@ -202,6 +203,7 @@ function BookPage() {
           </div>
         </main>
         <SiteFooter settings={settings} />
+        <BackToTop />
       </div>
     );
   }
@@ -391,6 +393,7 @@ function BookPage() {
         </form>
       </main>
       <SiteFooter settings={settings} />
+      <BackToTop />
     </div>
   );
 }

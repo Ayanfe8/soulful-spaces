@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { SiteNav } from "./SiteNav";
 import { SiteFooter } from "./SiteFooter";
+import { BackToTop } from "./BackToTop";
 import type { Database } from "@/integrations/supabase/types";
 
 export interface ServicePageProps {
@@ -180,6 +181,7 @@ export function ServicePage(p: ServicePageProps) {
       </section>
 
       <SiteFooter settings={p.settings} />
+      <BackToTop />
     </div>
   );
 }

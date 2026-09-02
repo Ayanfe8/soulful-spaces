@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
+import { BackToTop } from "@/components/BackToTop";
 import { siteSettingsQueryOptions } from "@/lib/site-settings-data";
 import { portfolioQueryOptions } from "@/lib/portfolio-data";
 import { storageImageUrl } from "@/lib/storage";
@@ -167,6 +168,7 @@ function PortfolioPage() {
       </section>
 
       <SiteFooter settings={settings} />
+      <BackToTop />
 
       {/* Lightbox */}
       {lightbox && (
