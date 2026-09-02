@@ -34,18 +34,14 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
         <img
           src={logo}
           alt="Habitat by Grayson"
-          className={`h-10 md:h-12 w-auto object-contain rounded-sm ${overlay ? "ring-1 ring-bone/20 shadow-lg" : ""}`}
+          className="h-10 md:h-12 w-auto object-contain rounded-sm"
           width={256}
           height={256}
         />
       </Link>
 
       {/* Desktop nav */}
-      <div
-        className={`hidden md:flex items-center gap-8 ${
-          overlay ? "text-bone" : "text-charcoal"
-        }`}
-      >
+      <div className="hidden md:flex items-center gap-8 text-charcoal">
         {navLinks.map((link) => (
           <Link key={link.to} to={link.to} className={linkBase}>
             {link.label}
@@ -53,11 +49,7 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
         ))}
         <Link
           to="/book"
-          className={`px-4 py-2 border transition-colors ${
-            overlay
-              ? "border-bone hover:bg-bone hover:text-charcoal"
-              : "border-charcoal hover:bg-charcoal hover:text-bone"
-          }`}
+          className="px-4 py-2 border border-charcoal transition-colors hover:bg-charcoal hover:text-bone"
         >
           Book
         </Link>
@@ -69,18 +61,14 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
           <button
             type="button"
             aria-label="Open menu"
-            className={`md:hidden p-2 -mr-2 transition-opacity hover:opacity-60 ${
-              overlay ? "text-bone" : "text-charcoal"
-            }`}
+            className="md:hidden p-2 -mr-2 transition-opacity hover:opacity-60 text-charcoal"
           >
             <Menu className="h-6 w-6" />
           </button>
         </SheetTrigger>
         <SheetContent
           side="right"
-          className={`w-full sm:max-w-sm border-none p-0 ${
-            overlay ? "bg-charcoal text-bone" : "bg-bone text-charcoal"
-          }`}
+          className="w-full sm:max-w-sm border-none p-0 bg-bone text-charcoal"
         >
           <div className="flex flex-col h-full px-8 py-20">
             <div className="flex flex-col gap-8">
@@ -88,9 +76,7 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
                 <SheetClose key={link.to} asChild>
                   <Link
                     to={link.to}
-                    className={`${linkBase} text-lg ${
-                      overlay ? "text-bone" : "text-charcoal"
-                    }`}
+                    className={`${linkBase} text-lg text-charcoal`}
                   >
                     {link.label}
                   </Link>
@@ -99,11 +85,7 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
               <SheetClose asChild>
                 <Link
                   to="/book"
-                  className={`mt-4 px-6 py-3 text-center text-xs uppercase tracking-[0.2em] border transition-colors ${
-                    overlay
-                      ? "border-bone text-bone hover:bg-bone hover:text-charcoal"
-                      : "border-charcoal text-charcoal hover:bg-charcoal hover:text-bone"
-                  }`}
+                  className="mt-4 px-6 py-3 text-center text-xs uppercase tracking-[0.2em] border border-charcoal text-charcoal transition-colors hover:bg-charcoal hover:text-bone"
                 >
                   Book
                 </Link>
