@@ -13,5 +13,6 @@ export function storageImageUrl(path: string | null | undefined): string {
   if (!path) return "";
   if (path.startsWith("http")) return path;
   const clean = path.replace(/^\/+/, "");
-  return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${clean}`;
+  const base = readPublicConfigSync()?.url ?? FALLBACK_URL;
+  return `${base}/storage/v1/object/public/${BUCKET}/${clean}`;
 }
