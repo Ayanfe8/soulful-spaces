@@ -27,7 +27,7 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
   // Solid (portfolio / services / booking): opaque background, also in
   // normal document flow so it scrolls away with the page.
   const navClass = overlay
-    ? "relative w-full z-50 px-6 py-5 md:px-12 flex justify-between items-center text-bone"
+    ? "absolute top-0 w-full z-50 px-6 py-5 md:px-12 flex justify-between items-center text-bone"
     : "relative w-full z-50 px-6 py-5 md:px-12 flex justify-between items-center bg-bone border-b border-charcoal/10 shadow-sm text-charcoal";
 
   const borderColor = overlay ? "border-bone/60" : "border-charcoal";
