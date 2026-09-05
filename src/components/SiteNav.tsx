@@ -68,7 +68,7 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
           <button
             type="button"
             aria-label="Open menu"
-            className="md:hidden p-2 -mr-2 transition-opacity hover:opacity-60 text-charcoal"
+            className={`md:hidden p-2 -mr-2 transition-opacity hover:opacity-60 ${overlay ? "text-bone" : "text-charcoal"}`}
           >
             <Menu className="h-6 w-6" />
           </button>
