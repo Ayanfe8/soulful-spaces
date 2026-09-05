@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import logoAsset from "@/assets/habitat-logo.jpeg.asset.json";
+import logoAsset from "@/assets/HBG_LOGO.png.asset.json";
 import type { Database } from "@/integrations/supabase/types";
 
 const logo = logoAsset.url;
