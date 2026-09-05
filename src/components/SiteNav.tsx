@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu } from "lucide-react";
-import logoAsset from "@/assets/habitat-logo.jpeg.asset.json";
+import logoAsset from "@/assets/HBG_LOGO.png.asset.json";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 
 const logo = logoAsset.url;
