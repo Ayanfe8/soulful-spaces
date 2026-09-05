@@ -22,14 +22,21 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
   const linkBase =
     "text-xs uppercase tracking-[0.2em] transition-opacity hover:opacity-60";
 
+  // Overlay (homepage): transparent over the hero, sits in normal document
+  // flow so it scrolls away with the page — never pinned.
+  // Solid (portfolio / services / booking): opaque background, also in
+  // normal document flow so it scrolls away with the page.
+  const navClass = overlay
+    ? "absolute top-0 w-full z-50 px-6 py-5 md:px-12 flex justify-between items-center text-bone"
+    : "relative w-full z-50 px-6 py-5 md:px-12 flex justify-between items-center bg-bone border-b border-charcoal/10 shadow-sm text-charcoal";
+
+  const borderColor = overlay ? "border-bone/60" : "border-charcoal";
+  const bookHover = overlay
+    ? "hover:bg-bone hover:text-charcoal"
+    : "hover:bg-charcoal hover:text-bone";
+
   return (
-    <nav
-      className={
-        overlay
-          ? "fixed top-0 w-full z-50 px-6 py-5 md:px-12 flex justify-between items-center bg-bone border-b border-charcoal/10 shadow-sm"
-          : "sticky top-0 w-full z-50 px-6 py-5 md:px-12 flex justify-between items-center bg-bone border-b border-charcoal/10 shadow-sm"
-      }
-    >
+    <nav className={navClass}>
       <Link to="/" className="flex items-center">
         <img
           src={logo}
@@ -41,7 +48,7 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
       </Link>
 
       {/* Desktop nav */}
-      <div className="hidden md:flex items-center gap-8 text-charcoal">
+      <div className="hidden md:flex items-center gap-8">
         {navLinks.map((link) => (
           <Link key={link.to} to={link.to} className={linkBase}>
             {link.label}
@@ -49,7 +56,7 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
         ))}
         <Link
           to="/book"
-          className="px-4 py-2 border border-charcoal transition-colors hover:bg-charcoal hover:text-bone"
+          className={`px-4 py-2 border ${borderColor} transition-colors ${bookHover}`}
         >
           Book
         </Link>
@@ -61,7 +68,7 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
           <button
             type="button"
             aria-label="Open menu"
-            className="md:hidden p-2 -mr-2 transition-opacity hover:opacity-60 text-charcoal"
+            className={`md:hidden p-2 -mr-2 transition-opacity hover:opacity-60 ${overlay ? "text-bone" : "text-charcoal"}`}
           >
             <Menu className="h-6 w-6" />
           </button>
