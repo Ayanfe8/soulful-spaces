@@ -1,10 +1,5 @@
-"use client";
-
-import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
 import logoAsset from "@/assets/HBG_LOGO.png.asset.json";
-import { getBrowserSupabase } from "@/lib/supabase-browser";
 import type { Database } from "@/integrations/supabase/types";
 
 const logo = logoAsset.url;
@@ -28,40 +23,6 @@ export function SiteFooter({ settings }: SiteFooterProps) {
   const pinterestUrl = settings?.pinterest_url;
   const journalEnabled = settings?.journal_enabled ?? false;
 
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">(
-    "idle",
-  );
-
-  async function handleSubscribe(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const value = email.trim();
-    if (!value || status === "sending") return;
-
-    setStatus("sending");
-    try {
-      const supabase = await getBrowserSupabase();
-      const { error } = await supabase
-        .from("subscribers")
-        .insert({ email: value, source: "footer" });
-
-      if (error) {
-        // 23505 = that address is already on the list; no need to alarm anyone.
-        if (error.code === "23505") {
-          setStatus("done");
-          setEmail("");
-          return;
-        }
-        setStatus("error");
-        return;
-      }
-      setStatus("done");
-      setEmail("");
-    } catch {
-      setStatus("error");
-    }
-  }
-
   return (
     <footer
       id="contact"
@@ -74,7 +35,7 @@ export function SiteFooter({ settings }: SiteFooterProps) {
             <img
               src={logo}
               alt="Habitat by Grayson — Spaces that tell your story"
-              className="w-20 md:w-28 h-auto object-contain mb-8 md:mb-10"
+              className="w-24 md:w-32 h-auto object-contain mb-8 md:mb-10"
               width={512}
               height={512}
               loading="lazy"
@@ -97,9 +58,9 @@ export function SiteFooter({ settings }: SiteFooterProps) {
             </a>
           </div>
 
-          {/* Index: navigation and mailing list */}
-          <div className="lg:col-span-5 flex flex-col gap-12 lg:pt-12">
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 text-[13px] tracking-[0.14em] uppercase">
+          {/* Index: navigation */}
+          <div className="lg:col-span-5 lg:pt-12">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 text-[12px] tracking-[0.14em] uppercase">
               <div className="flex flex-col gap-3">
                 <span className={labelClass}>Studio</span>
                 <Link to="/" className={linkClass}>Home</Link>
@@ -144,41 +105,6 @@ export function SiteFooter({ settings }: SiteFooterProps) {
                   <span className="text-bone/35">Journal</span>
                 )}
               </div>
-            </div>
-
-            <div className="border-t border-bone/10 pt-8">
-              <span className={labelClass}>Keep in touch</span>
-              <form
-                onSubmit={handleSubscribe}
-                className="mt-4 flex items-center gap-3 border-b border-bone/25 focus-within:border-terracotta transition-colors"
-              >
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  placeholder="Email for occasional studio notes"
-                  aria-label="Email address for occasional studio notes"
-                  className="flex-1 min-w-0 bg-transparent py-3 text-sm tracking-normal normal-case text-bone placeholder:text-bone/40 focus:outline-none"
-                />
-                <button
-                  type="submit"
-                  disabled={status === "sending"}
-                  aria-label="Join the mailing list"
-                  className="flex h-9 w-9 shrink-0 items-center justify-center text-bone hover:text-terracotta transition-colors disabled:opacity-40"
-                >
-                  <ArrowRight className="h-4 w-4" />
-                </button>
-              </form>
-              <p
-                className="mt-3 text-[12px] tracking-normal normal-case text-bone/70"
-                role="status"
-              >
-                {status === "done" && "You're on the list — thank you."}
-                {status === "error" &&
-                  "That didn't go through. Email us directly instead."}
-              </p>
             </div>
           </div>
         </div>
