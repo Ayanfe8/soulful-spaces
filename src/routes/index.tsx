@@ -143,7 +143,7 @@ function Index() {
       </section>
 
       {/* Philosophy */}
-      <section id="philosophy" className="py-32 md:py-48 px-6 md:px-12">
+      <section id="philosophy" className="pt-32 md:pt-48 pb-12 md:pb-16 px-6 md:px-12">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4 lg:sticky lg:top-32 self-start">
             <span className="uppercase tracking-[0.25em] text-xs text-terracotta font-medium mb-6 block">
@@ -212,7 +212,7 @@ function Index() {
       </section>
 
       {/* Services */}
-      <section id="services" className="py-32 md:py-48 px-6 md:px-12">
+      <section id="services" className="pt-12 md:pt-16 pb-32 md:pb-48 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
             <h3 className="font-serif text-5xl md:text-6xl text-balance max-w-[16ch] leading-[1.05] font-light">
