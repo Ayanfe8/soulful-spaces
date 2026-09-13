@@ -98,7 +98,7 @@ export function SiteFooter({ settings }: SiteFooterProps) {
           </div>
 
           {/* Index: navigation and mailing list */}
-          <div className="lg:col-span-5 flex flex-col gap-12 lg:pt-2">
+          <div className="lg:col-span-5 flex flex-col gap-12 lg:pt-12">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 text-[13px] tracking-[0.14em] uppercase">
               <div className="flex flex-col gap-3">
                 <span className={labelClass}>Studio</span>
