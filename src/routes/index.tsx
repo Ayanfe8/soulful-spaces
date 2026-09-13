@@ -86,6 +86,11 @@ const services = [
 const experienceRow1 = ["Peace", "Belonging", "Soul", "Comfort"];
 const experienceRow2 = ["Identity", "Refined", "Heritage", "Home"];
 
+// Each row renders two identical halves, so the -50% keyframe always lands
+// exactly on a copy boundary. Each half is three passes of the word list to
+// keep the strip wider than any viewport at these text sizes.
+const marqueeHalf = (words: string[]) => [...words, ...words, ...words];
+
 function Index() {
   const { data } = useSuspenseQuery(homepageContentQueryOptions());
   if (data.degraded) return <ContentUnavailable section="page" />;
@@ -177,13 +182,13 @@ function Index() {
       </section>
 
       {/* Experience marquee */}
-      <section className="py-24 md:py-32 bg-clay/25 overflow-hidden">
+      <section className="py-12 md:py-16 bg-clay/25 overflow-hidden">
         <div className="flex flex-col gap-6 md:gap-10">
-          <div className="flex whitespace-nowrap gap-12 marquee-l">
-            {[...experienceRow1, ...experienceRow1, ...experienceRow1].map((w, i) => (
+          <div className="flex w-max whitespace-nowrap marquee-l">
+            {[...marqueeHalf(experienceRow1), ...marqueeHalf(experienceRow1)].map((w, i) => (
               <span
                 key={`r1-${i}`}
-                className={`font-serif text-7xl md:text-[10rem] lg:text-[12rem] leading-none ${
+                className={`font-serif text-5xl md:text-5xl lg:text-6xl leading-none pr-12 ${
                   i % 2 === 0 ? "italic text-terracotta/15" : "text-charcoal"
                 }`}
               >
@@ -191,11 +196,11 @@ function Index() {
               </span>
             ))}
           </div>
-          <div className="flex whitespace-nowrap gap-12 marquee-r">
-            {[...experienceRow2, ...experienceRow2, ...experienceRow2].map((w, i) => (
+          <div className="flex w-max whitespace-nowrap marquee-r">
+            {[...marqueeHalf(experienceRow2), ...marqueeHalf(experienceRow2)].map((w, i) => (
               <span
                 key={`r2-${i}`}
-                className={`font-serif text-7xl md:text-[10rem] lg:text-[12rem] leading-none ${
+                className={`font-serif text-5xl md:text-5xl lg:text-6xl leading-none pr-12 ${
                   i % 2 === 0 ? "text-charcoal" : "italic text-terracotta/15"
                 }`}
               >
