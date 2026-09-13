@@ -86,6 +86,11 @@ const services = [
 const experienceRow1 = ["Peace", "Belonging", "Soul", "Comfort"];
 const experienceRow2 = ["Identity", "Refined", "Heritage", "Home"];
 
+// Each row renders two identical halves, so the -50% keyframe always lands
+// exactly on a copy boundary. Each half is three passes of the word list to
+// keep the strip wider than any viewport at these text sizes.
+const marqueeHalf = (words: string[]) => [...words, ...words, ...words];
+
 function Index() {
   const { data } = useSuspenseQuery(homepageContentQueryOptions());
   if (data.degraded) return <ContentUnavailable section="page" />;
@@ -138,7 +143,7 @@ function Index() {
       </section>
 
       {/* Philosophy */}
-      <section id="philosophy" className="py-32 md:py-48 px-6 md:px-12">
+      <section id="philosophy" className="pt-32 md:pt-48 pb-12 md:pb-16 px-6 md:px-12">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4 lg:sticky lg:top-32 self-start">
             <span className="uppercase tracking-[0.25em] text-xs text-terracotta font-medium mb-6 block">
@@ -177,13 +182,13 @@ function Index() {
       </section>
 
       {/* Experience marquee */}
-      <section className="py-24 md:py-32 bg-clay/25 overflow-hidden">
+      <section className="py-12 md:py-16 bg-clay/25 overflow-hidden">
         <div className="flex flex-col gap-6 md:gap-10">
-          <div className="flex whitespace-nowrap gap-12 marquee-l">
-            {[...experienceRow1, ...experienceRow1, ...experienceRow1].map((w, i) => (
+          <div className="flex w-max whitespace-nowrap marquee-l">
+            {[...marqueeHalf(experienceRow1), ...marqueeHalf(experienceRow1)].map((w, i) => (
               <span
                 key={`r1-${i}`}
-                className={`font-serif text-7xl md:text-[10rem] lg:text-[12rem] leading-none ${
+                className={`font-serif text-5xl md:text-5xl lg:text-6xl leading-none pr-12 ${
                   i % 2 === 0 ? "italic text-terracotta/15" : "text-charcoal"
                 }`}
               >
@@ -191,11 +196,11 @@ function Index() {
               </span>
             ))}
           </div>
-          <div className="flex whitespace-nowrap gap-12 marquee-r">
-            {[...experienceRow2, ...experienceRow2, ...experienceRow2].map((w, i) => (
+          <div className="flex w-max whitespace-nowrap marquee-r">
+            {[...marqueeHalf(experienceRow2), ...marqueeHalf(experienceRow2)].map((w, i) => (
               <span
                 key={`r2-${i}`}
-                className={`font-serif text-7xl md:text-[10rem] lg:text-[12rem] leading-none ${
+                className={`font-serif text-5xl md:text-5xl lg:text-6xl leading-none pr-12 ${
                   i % 2 === 0 ? "text-charcoal" : "italic text-terracotta/15"
                 }`}
               >
@@ -207,7 +212,7 @@ function Index() {
       </section>
 
       {/* Services */}
-      <section id="services" className="py-32 md:py-48 px-6 md:px-12">
+      <section id="services" className="pt-12 md:pt-16 pb-32 md:pb-48 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
             <h3 className="font-serif text-5xl md:text-6xl text-balance max-w-[16ch] leading-[1.05] font-light">
