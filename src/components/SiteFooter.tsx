@@ -91,7 +91,7 @@ export function SiteFooter({ settings }: SiteFooterProps) {
             </Link>
             <a
               href={`mailto:${contactEmail}`}
-              className="mt-8 text-base font-serif italic border-b border-bone/20 pb-1.5 hover:text-terracotta transition-colors"
+              className="mt-8 inline-block text-base font-serif italic border-b border-bone/20 pb-1.5 hover:text-terracotta transition-colors"
             >
               {contactEmail}
             </a>
@@ -172,7 +172,7 @@ export function SiteFooter({ settings }: SiteFooterProps) {
                 </button>
               </form>
               <p
-                className="mt-3 text-[12px] tracking-normal normal-case text-bone/50"
+                className="mt-3 text-[12px] tracking-normal normal-case text-bone/70"
                 role="status"
               >
                 {status === "done" && "You're on the list — thank you."}
