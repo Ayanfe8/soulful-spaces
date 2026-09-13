@@ -179,11 +179,11 @@ function Index() {
       {/* Experience marquee */}
       <section className="py-12 md:py-16 bg-clay/25 overflow-hidden">
         <div className="flex flex-col gap-6 md:gap-10">
-          <div className="flex whitespace-nowrap gap-12 marquee-l">
+          <div className="flex whitespace-nowrap marquee-l">
             {[...experienceRow1, ...experienceRow1].map((w, i) => (
               <span
                 key={`r1-${i}`}
-                className={`font-serif text-5xl md:text-5xl lg:text-6xl leading-none ${
+                className={`font-serif text-5xl md:text-5xl lg:text-6xl leading-none pr-12 ${
                   i % 2 === 0 ? "italic text-terracotta/15" : "text-charcoal"
                 }`}
               >
@@ -191,11 +191,11 @@ function Index() {
               </span>
             ))}
           </div>
-          <div className="flex whitespace-nowrap gap-12 marquee-r">
+          <div className="flex whitespace-nowrap marquee-r">
             {[...experienceRow2, ...experienceRow2].map((w, i) => (
               <span
                 key={`r2-${i}`}
-                className={`font-serif text-5xl md:text-5xl lg:text-6xl leading-none ${
+                className={`font-serif text-5xl md:text-5xl lg:text-6xl leading-none pr-12 ${
                   i % 2 === 0 ? "text-charcoal" : "italic text-terracotta/15"
                 }`}
               >
