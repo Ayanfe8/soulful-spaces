@@ -40,7 +40,7 @@ export function SiteFooter({ settings }: SiteFooterProps) {
               height={512}
               loading="lazy"
             />
-            <h2 className="font-serif text-3xl md:text-5xl leading-[1.06] mb-8 md:mb-10 text-balance max-w-[22ch] font-light">
+            <h2 className="font-serif text-3xl md:text-5xl leading-[1.06] mb-8 md:mb-10 text-balance max-w-[22ch] font-light text-center lg:text-left">
               Ready to create a space that feels like{" "}
               <em className="italic text-clay">you?</em>
             </h2>
