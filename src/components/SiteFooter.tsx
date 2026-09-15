@@ -31,7 +31,7 @@ export function SiteFooter({ settings }: SiteFooterProps) {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 pb-16 md:pb-20 border-b border-bone/10">
           {/* Studio: identity, invitation, direct line */}
-          <div className="lg:col-span-7 flex flex-col items-start">
+          <div className="lg:col-span-7 flex flex-col items-center lg:items-start">
             <img
               src={logo}
               alt="Habitat by Grayson — Spaces that tell your story"
@@ -40,7 +40,7 @@ export function SiteFooter({ settings }: SiteFooterProps) {
               height={512}
               loading="lazy"
             />
-            <h2 className="font-serif text-4xl md:text-6xl leading-[1.06] mb-8 md:mb-10 text-balance max-w-[22ch] font-light">
+            <h2 className="font-serif text-3xl md:text-5xl leading-[1.06] mb-8 md:mb-10 text-balance max-w-[22ch] font-light text-center lg:text-left">
               Ready to create a space that feels like{" "}
               <em className="italic text-clay">you?</em>
             </h2>
