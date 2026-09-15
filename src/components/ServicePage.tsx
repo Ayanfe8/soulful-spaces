@@ -17,7 +17,7 @@ export interface ServicePageProps {
   nextLink: { to: string; label: string };
   settings?: Pick<
     Database["public"]["Tables"]["site_settings"]["Row"],
-    "contact_email" | "instagram_url" | "pinterest_url" | "journal_enabled"
+    "contact_email" | "instagram_url" | "pinterest_url" | "whatsapp_url"
   > | null;
 }
 

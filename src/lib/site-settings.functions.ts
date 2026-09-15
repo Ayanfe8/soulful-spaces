@@ -4,7 +4,7 @@ type SiteSettingsPublic = {
   contact_email: string | null;
   instagram_url: string | null;
   pinterest_url: string | null;
-  journal_enabled: boolean;
+  whatsapp_url: string | null;
 } | null;
 
 /**
@@ -14,7 +14,7 @@ type SiteSettingsPublic = {
 export async function getSiteSettings(): Promise<SiteSettingsPublic> {
   const rows = await restSelect<NonNullable<SiteSettingsPublic>>(
     "site-settings",
-    "site_settings?select=contact_email,instagram_url,pinterest_url,journal_enabled&limit=1",
+    "site_settings?select=contact_email,instagram_url,pinterest_url,whatsapp_url&limit=1",
   );
   return rows[0] ?? null;
 }
