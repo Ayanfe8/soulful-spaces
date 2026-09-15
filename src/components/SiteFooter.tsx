@@ -28,45 +28,9 @@ export function SiteFooter({ settings }: SiteFooterProps) {
   const whatsappUrl = settings?.whatsapp_url;
 
   return (
-    <>
-      <section
-        aria-labelledby="footer-invitation"
-        className="bg-umber px-6 py-20 text-bone md:px-12 md:py-28"
-      >
-        <div className="mx-auto flex max-w-7xl flex-col items-center lg:items-start">
-          <img
-            src={logo}
-            alt="Habitat by Grayson — Spaces that tell your story"
-            className="mb-8 h-auto w-24 object-contain md:mb-10 md:w-32"
-            width={512}
-            height={512}
-            loading="lazy"
-          />
-          <h2
-            id="footer-invitation"
-            className="mb-8 max-w-[22ch] text-balance text-center font-serif text-3xl font-light leading-[1.06] md:mb-10 md:text-5xl lg:text-left"
-          >
-            Ready to create a space that feels like{" "}
-            <em className="italic text-clay">you?</em>
-          </h2>
-          <Link
-            to="/book"
-            className="inline-block bg-bone px-9 py-4 text-xs uppercase tracking-[0.25em] text-charcoal transition-colors hover:bg-terracotta hover:text-bone"
-          >
-            Book a consultation
-          </Link>
-          <a
-            href={`mailto:${contactEmail}`}
-            className="mt-8 inline-block border-b border-bone/20 pb-1.5 font-serif text-base italic transition-colors hover:text-terracotta"
-          >
-            {contactEmail}
-          </a>
-        </div>
-      </section>
-
-      <footer id="contact" className="bg-charcoal px-6 pb-10 pt-16 text-bone md:px-12 md:pt-20">
+      <footer id="contact" className="bg-charcoal px-6 pb-10 pt-16 font-sans text-bone md:px-12 md:pt-20">
         <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-14 pb-16 md:grid-cols-3 md:gap-12 lg:gap-24 lg:pb-20">
+          <div className="grid grid-cols-1 gap-14 pb-16 md:grid-cols-4 md:gap-10 lg:gap-16 lg:pb-20">
             <div>
               <div className="flex items-center gap-4">
                 <img
@@ -92,8 +56,16 @@ export function SiteFooter({ settings }: SiteFooterProps) {
               <div className="mt-6 flex flex-col gap-4 text-sm">
                 <Link to="/" className={linkClass}>Home</Link>
                 <Link to="/portfolio" className={linkClass}>Portfolio</Link>
-                <Link to="/services/styling" className={linkClass}>Services</Link>
                 <Link to="/book" className={linkClass}>Book</Link>
+              </div>
+            </nav>
+
+            <nav aria-label="Services navigation">
+              <h2 className={labelClass}>Services</h2>
+              <div className="mt-6 flex flex-col gap-4 text-sm">
+                <Link to="/services/styling" className={linkClass}>Styling</Link>
+                <Link to="/services/wellness" className={linkClass}>Wellness</Link>
+                <Link to="/services/heritage" className={linkClass}>Heritage</Link>
               </div>
             </nav>
 
@@ -142,6 +114,5 @@ export function SiteFooter({ settings }: SiteFooterProps) {
           </div>
         </div>
       </footer>
-    </>
   );
 }
