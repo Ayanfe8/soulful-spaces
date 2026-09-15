@@ -355,6 +355,7 @@ export type Database = {
           philosophy_quote: string | null
           pinterest_url: string | null
           updated_at: string
+          whatsapp_url: string | null
         }
         Insert: {
           contact_email?: string | null
@@ -367,6 +368,7 @@ export type Database = {
           philosophy_quote?: string | null
           pinterest_url?: string | null
           updated_at?: string
+          whatsapp_url?: string | null
         }
         Update: {
           contact_email?: string | null
@@ -379,6 +381,7 @@ export type Database = {
           philosophy_quote?: string | null
           pinterest_url?: string | null
           updated_at?: string
+          whatsapp_url?: string | null
         }
         Relationships: []
       }
