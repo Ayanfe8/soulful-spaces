@@ -92,7 +92,7 @@ function PortfolioPage() {
       </header>
 
       {/* Filter bar */}
-      <div className="sticky top-[72px] z-40 bg-bone/90 backdrop-blur-md border-y border-charcoal/10">
+      <div className="bg-bone border-y border-charcoal/10">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-5 flex gap-2 md:gap-3 overflow-x-auto">
           {categories.map((c) => (
             <button
