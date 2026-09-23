@@ -79,10 +79,10 @@ function PortfolioPage() {
       <header className="px-6 md:px-12 pt-16 md:pt-24 pb-12">
         <div className="max-w-7xl mx-auto">
           <span className="uppercase tracking-[0.25em] text-xs text-terracotta font-medium mb-6 block">
-            Selected Works — 2022 / 2024
+            THE HABITAT MOODBOARD
           </span>
           <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[0.95] font-light text-balance max-w-[16ch]">
-            A portfolio of <em className="italic text-terracotta">prepared spaces.</em>
+            Spaces, as a <em className="italic text-terracotta">feeling.</em>
           </h1>
           <p className="mt-8 max-w-[58ch] text-lg text-umber/80 leading-relaxed">
             Residences, shortlets, and hospitality concepts shaped around the people they belong to.
@@ -112,12 +112,20 @@ function PortfolioPage() {
 
       {/* Masonry-ish grid */}
       <section className="px-6 md:px-12 py-16 md:py-24">
-        <div className="max-w-7xl mx-auto columns-1 md:columns-2 lg:columns-3 gap-6 md:gap-8 [column-fill:_balance]">
+        <div
+          className={`max-w-7xl mx-auto gap-6 md:gap-8 ${
+            active === "Residential"
+              ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+              : "columns-1 md:columns-2 lg:columns-3 [column-fill:_balance]"
+          }`}
+        >
           {filtered.map((p, i) => (
             <button
               key={`${p.title}-${i}`}
               onClick={() => setLightbox(p)}
-              className="block w-full mb-6 md:mb-8 break-inside-avoid text-left group cursor-pointer"
+              className={`block w-full break-inside-avoid text-left group cursor-pointer ${
+                active === "Residential" ? "" : "mb-6 md:mb-8"
+              }`}
             >
               <div
                 className={`overflow-hidden rounded-sm bg-clay/30 ${
@@ -135,17 +143,19 @@ function PortfolioPage() {
                   className="w-full h-full object-cover transition-transform duration-[1400ms] group-hover:scale-[1.04]"
                 />
               </div>
-              <div className="flex justify-between items-baseline mt-4 pb-2 border-b border-charcoal/10">
-                <div>
-                  <h3 className="font-serif text-xl group-hover:italic transition-all">
-                    {p.title}
-                  </h3>
-                  <p className="text-[11px] uppercase tracking-[0.2em] text-umber/60 mt-1">
-                    {p.category} · {p.location}
-                  </p>
+              {p.category !== "Residential" && (
+                <div className="flex justify-between items-baseline mt-4 pb-2 border-b border-charcoal/10">
+                  <div>
+                    <h3 className="font-serif text-xl group-hover:italic transition-all">
+                      {p.title}
+                    </h3>
+                    <p className="text-[11px] uppercase tracking-[0.2em] text-umber/60 mt-1">
+                      {p.category} · {p.location}
+                    </p>
+                  </div>
+                  <span className="font-serif text-sm text-terracotta tabular-nums">{p.year}</span>
                 </div>
-                <span className="font-serif text-sm text-terracotta tabular-nums">{p.year}</span>
-              </div>
+              )}
             </button>
           ))}
         </div>
@@ -194,15 +204,17 @@ function PortfolioPage() {
               alt={lightbox.title}
               className="w-full max-h-[80vh] object-contain rounded-sm"
             />
-            <figcaption className="flex justify-between items-baseline text-bone">
-              <div>
-                <h3 className="font-serif text-2xl">{lightbox.title}</h3>
-                <p className="text-[11px] uppercase tracking-[0.25em] text-bone/60 mt-1">
-                  {lightbox.category} · {lightbox.location}
-                </p>
-              </div>
-              <span className="font-serif text-clay">{lightbox.year}</span>
-            </figcaption>
+            {lightbox.category !== "Residential" && (
+              <figcaption className="flex justify-between items-baseline text-bone">
+                <div>
+                  <h3 className="font-serif text-2xl">{lightbox.title}</h3>
+                  <p className="text-[11px] uppercase tracking-[0.25em] text-bone/60 mt-1">
+                    {lightbox.category} · {lightbox.location}
+                  </p>
+                </div>
+                <span className="font-serif text-clay">{lightbox.year}</span>
+              </figcaption>
+            )}
           </figure>
         </div>
       )}
