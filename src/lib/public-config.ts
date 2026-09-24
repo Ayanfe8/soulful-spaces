@@ -16,7 +16,8 @@
 
 export type PublicSupabaseConfig = { url: string; key: string };
 
-const FALLBACK_URL = "https://rrybhxqsayenioprikon.supabase.co";
+// No hardcoded project fallback: if real config can't be resolved, callers
+// throw and routes render the honest ContentUnavailable degrade state.
 
 declare global {
   // eslint-disable-next-line no-var
@@ -36,13 +37,13 @@ export function readPublicConfigSync(): PublicSupabaseConfig | undefined {
   const url =
     (import.meta.env?.VITE_SUPABASE_URL as string | undefined) ||
     (typeof process !== "undefined" ? process.env?.["SUPABASE_URL"] : undefined) ||
-    FALLBACK_URL;
+    "";
   const key =
     (import.meta.env?.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined) ||
     (typeof process !== "undefined" ? process.env?.["SUPABASE_PUBLISHABLE_KEY"] : undefined) ||
     "";
 
-  return key ? { url: trim(url), key } : undefined;
+  return url && key ? { url: trim(url), key } : undefined;
 }
 
 let remotePromise: Promise<PublicSupabaseConfig> | undefined;
