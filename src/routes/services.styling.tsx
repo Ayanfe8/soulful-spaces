@@ -30,8 +30,8 @@ export const Route = createFileRoute("/services/styling")({
       { name: "twitter:image", content: storageImageUrl("services/service-styling.jpg") },
     ],
   }),
-  errorComponent: ({ error }) => (
-    <div role="alert" className="p-12">{error.message}</div>
+  errorComponent: ({ error }: { error: unknown }) => (
+    <div role="alert" className="p-12">{error instanceof Error ? error.message : String(error)}</div>
   ),
   notFoundComponent: () => <div className="p-12">Service not found.</div>,
   component: StylingRoute,
