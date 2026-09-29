@@ -45,6 +45,8 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
         />
       </Link>
 
+      {/* Mobile header CTA — between logo and hamburger, visible on every page */}
+      <div className="flex items-center gap-2">
       {/* Desktop nav */}
       <div className="hidden md:flex items-center gap-8">
         {navLinks.map((link) => (
