@@ -62,7 +62,16 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
         </Link>
       </div>
 
+        {/* Mobile Book CTA */}
+        <Link
+          to="/book"
+          className={`md:hidden px-3 py-1.5 border ${borderColor} text-xs uppercase tracking-[0.2em] transition-colors ${bookHover}`}
+        >
+          Book
+        </Link>
+
       {/* Mobile menu */}
+
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <button
