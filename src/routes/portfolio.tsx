@@ -47,7 +47,9 @@ export const Route = createFileRoute("/portfolio")({
       context.queryClient.ensureQueryData(siteSettingsQueryOptions()),
       context.queryClient.ensureQueryData(portfolioQueryOptions()),
     ]),
-  errorComponent: ({ error }) => <div role="alert" className="p-12">{error.message}</div>,
+  errorComponent: ({ error }: { error: unknown }) => (
+    <div role="alert" className="p-12">{error instanceof Error ? error.message : String(error)}</div>
+  ),
   notFoundComponent: () => <div className="p-12">No projects found.</div>,
   component: PortfolioPage,
 });

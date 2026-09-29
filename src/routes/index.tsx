@@ -50,9 +50,9 @@ export const Route = createFileRoute("/")({
     ],
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(homepageContentQueryOptions()),
-  errorComponent: ({ error }) => (
+  errorComponent: ({ error }: { error: unknown }) => (
     <div role="alert" className="p-12 text-center text-umber">
-      {error.message}
+      {error instanceof Error ? error.message : String(error)}
     </div>
   ),
   notFoundComponent: () => <div className="p-12 text-center text-umber">Page not found.</div>,
@@ -140,6 +140,12 @@ function Index() {
             )}
           </h1>
           <p className="mt-10 max-w-md text-bone/75 leading-relaxed">{heroSubhead}</p>
+          <Link
+            to="/book"
+            className="mt-8 inline-block px-4 py-2 border border-bone/60 text-xs uppercase tracking-[0.2em] text-bone transition-colors hover:bg-bone hover:text-charcoal md:hidden"
+          >
+            Book a Consultation
+          </Link>
         </div>
       </section>
 
