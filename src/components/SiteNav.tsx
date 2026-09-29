@@ -110,6 +110,7 @@ export function SiteNav({ variant = "solid" }: { variant?: "solid" | "overlay" }
           </div>
         </SheetContent>
       </Sheet>
+      </div>
     </nav>
   );
 }
