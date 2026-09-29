@@ -1,9 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { FaInstagram, FaPinterestP, FaWhatsapp } from "react-icons/fa";
-import logoAsset from "@/assets/HBG_LOGO.png.asset.json";
+import logo from "@/assets/hbg-logo.webp";
 import type { Database } from "@/integrations/supabase/types";
-
-const logo = logoAsset.url;
 
 type SiteSettingsRow = Database["public"]["Tables"]["site_settings"]["Row"];
 

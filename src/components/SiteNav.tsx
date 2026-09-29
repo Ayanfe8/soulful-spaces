@@ -3,10 +3,8 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu } from "lucide-react";
-import logoAsset from "@/assets/HBG_LOGO.png.asset.json";
+import logo from "@/assets/hbg-logo.webp";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
-
-const logo = logoAsset.url;
 
 const navLinks = [
   { label: "Styling", to: "/services/styling" },

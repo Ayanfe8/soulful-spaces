@@ -9,7 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import heroImg from "@/assets/hero-interior.jpg";
-import heroNewAsset from "@/assets/hero-interior-new.jpg.asset.json";
+import heroNew from "@/assets/hero-interior-new.webp";
 import stylingImg from "@/assets/service-styling.jpg";
 import wellnessImg from "@/assets/service-wellness.jpg";
 import heritageImg from "@/assets/service-heritage.jpg";
@@ -115,7 +115,7 @@ function Index() {
       {/* Hero */}
       <section id="top" className="relative h-screen w-full flex items-end overflow-hidden bg-umber">
         <img
-          src={heroNewAsset.url}
+          src={heroNew}
           alt="Sun-drenched modern African villa interior with clay walls and carved wood furniture"
           width={1920}
           height={1080}

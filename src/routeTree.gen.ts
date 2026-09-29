@@ -9,28 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as PortfolioRouteImport } from './routes/portfolio'
-import { Route as BookRouteImport } from './routes/book'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BookRouteImport } from './routes/book'
+import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
-import { Route as ServicesWellnessRouteImport } from './routes/services.wellness'
-import { Route as ServicesStylingRouteImport } from './routes/services.styling'
-import { Route as ServicesHeritageRouteImport } from './routes/services.heritage'
-import { Route as AdminResetPasswordRouteImport } from './routes/admin/reset-password'
-import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminBookingsRouteImport } from './routes/admin/bookings'
-import { Route as ApiPublicConfigRouteImport } from './routes/api/public/config'
+import { Route as AdminLoginRouteImport } from './routes/admin/login'
+import { Route as AdminResetPasswordRouteImport } from './routes/admin/reset-password'
+import { Route as ServicesHeritageRouteImport } from './routes/services.heritage'
+import { Route as ServicesStylingRouteImport } from './routes/services.styling'
+import { Route as ServicesWellnessRouteImport } from './routes/services.wellness'
 import { Route as ApiPublicBookingEmailRouteImport } from './routes/api/public/booking-email'
+import { Route as ApiPublicConfigRouteImport } from './routes/api/public/config'
 
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PortfolioRoute = PortfolioRouteImport.update({
-  id: '/portfolio',
-  path: '/portfolio',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BookRoute = BookRouteImport.update({
@@ -38,9 +33,14 @@ const BookRoute = BookRouteImport.update({
   path: '/book',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const PortfolioRoute = PortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -48,24 +48,9 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesWellnessRoute = ServicesWellnessRouteImport.update({
-  id: '/services/wellness',
-  path: '/services/wellness',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesStylingRoute = ServicesStylingRouteImport.update({
-  id: '/services/styling',
-  path: '/services/styling',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesHeritageRoute = ServicesHeritageRouteImport.update({
-  id: '/services/heritage',
-  path: '/services/heritage',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminResetPasswordRoute = AdminResetPasswordRouteImport.update({
-  id: '/admin/reset-password',
-  path: '/admin/reset-password',
+const AdminBookingsRoute = AdminBookingsRouteImport.update({
+  id: '/admin/bookings',
+  path: '/admin/bookings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
@@ -73,19 +58,34 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminBookingsRoute = AdminBookingsRouteImport.update({
-  id: '/admin/bookings',
-  path: '/admin/bookings',
+const AdminResetPasswordRoute = AdminResetPasswordRouteImport.update({
+  id: '/admin/reset-password',
+  path: '/admin/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicConfigRoute = ApiPublicConfigRouteImport.update({
-  id: '/api/public/config',
-  path: '/api/public/config',
+const ServicesHeritageRoute = ServicesHeritageRouteImport.update({
+  id: '/services/heritage',
+  path: '/services/heritage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesStylingRoute = ServicesStylingRouteImport.update({
+  id: '/services/styling',
+  path: '/services/styling',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesWellnessRoute = ServicesWellnessRouteImport.update({
+  id: '/services/wellness',
+  path: '/services/wellness',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicBookingEmailRoute = ApiPublicBookingEmailRouteImport.update({
   id: '/api/public/booking-email',
   path: '/api/public/booking-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicConfigRoute = ApiPublicConfigRouteImport.update({
+  id: '/api/public/config',
+  path: '/api/public/config',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -201,18 +201,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/portfolio': {
-      id: '/portfolio'
-      path: '/portfolio'
-      fullPath: '/portfolio'
-      preLoaderRoute: typeof PortfolioRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/book': {
@@ -222,11 +215,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BookRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/portfolio': {
+      id: '/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -236,32 +236,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/wellness': {
-      id: '/services/wellness'
-      path: '/services/wellness'
-      fullPath: '/services/wellness'
-      preLoaderRoute: typeof ServicesWellnessRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/styling': {
-      id: '/services/styling'
-      path: '/services/styling'
-      fullPath: '/services/styling'
-      preLoaderRoute: typeof ServicesStylingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/heritage': {
-      id: '/services/heritage'
-      path: '/services/heritage'
-      fullPath: '/services/heritage'
-      preLoaderRoute: typeof ServicesHeritageRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/reset-password': {
-      id: '/admin/reset-password'
-      path: '/admin/reset-password'
-      fullPath: '/admin/reset-password'
-      preLoaderRoute: typeof AdminResetPasswordRouteImport
+    '/admin/bookings': {
+      id: '/admin/bookings'
+      path: '/admin/bookings'
+      fullPath: '/admin/bookings'
+      preLoaderRoute: typeof AdminBookingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/login': {
@@ -271,18 +250,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/bookings': {
-      id: '/admin/bookings'
-      path: '/admin/bookings'
-      fullPath: '/admin/bookings'
-      preLoaderRoute: typeof AdminBookingsRouteImport
+    '/admin/reset-password': {
+      id: '/admin/reset-password'
+      path: '/admin/reset-password'
+      fullPath: '/admin/reset-password'
+      preLoaderRoute: typeof AdminResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/config': {
-      id: '/api/public/config'
-      path: '/api/public/config'
-      fullPath: '/api/public/config'
-      preLoaderRoute: typeof ApiPublicConfigRouteImport
+    '/services/heritage': {
+      id: '/services/heritage'
+      path: '/services/heritage'
+      fullPath: '/services/heritage'
+      preLoaderRoute: typeof ServicesHeritageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/styling': {
+      id: '/services/styling'
+      path: '/services/styling'
+      fullPath: '/services/styling'
+      preLoaderRoute: typeof ServicesStylingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/wellness': {
+      id: '/services/wellness'
+      path: '/services/wellness'
+      fullPath: '/services/wellness'
+      preLoaderRoute: typeof ServicesWellnessRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/booking-email': {
@@ -290,6 +283,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/booking-email'
       fullPath: '/api/public/booking-email'
       preLoaderRoute: typeof ApiPublicBookingEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/config': {
+      id: '/api/public/config'
+      path: '/api/public/config'
+      fullPath: '/api/public/config'
+      preLoaderRoute: typeof ApiPublicConfigRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
