@@ -10,15 +10,11 @@ import {
 } from "@/components/ui/accordion";
 import heroImg from "@/assets/hero-interior.jpg";
 import heroNew from "@/assets/hero-interior-new.webp";
-import stylingImg from "@/assets/service-styling.jpg";
-import wellnessImg from "@/assets/service-wellness.jpg";
-import heritageImg from "@/assets/service-heritage.jpg";
-import p1 from "@/assets/portfolio-1.jpg";
 import p2 from "@/assets/portfolio-2.jpg";
-import p3 from "@/assets/portfolio-3.jpg";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { homepageContentQueryOptions } from "@/lib/homepage-data";
 import { ContentUnavailable } from "@/components/ContentUnavailable";
+import { storageImageUrl } from "@/lib/storage";
 
 
 export const Route = createFileRoute("/")({
@@ -65,24 +61,27 @@ const services = [
     n: "01",
     title: "Interior Styling",
     body: "Thoughtfully curated interiors designed around your lifestyle, personality, and the rhythm of how you live.",
-    img: stylingImg,
+    img: "portfolio/rooted-ease-living.jpg",
     to: "/services/styling" as const,
   },
   {
     n: "02",
     title: "Wellness-Inspired Living",
     body: "Environments engineered for restoration — natural light, sustainable materials, and considered stillness.",
-    img: wellnessImg,
+    img: "portfolio/soft-restore-retreat.jpg",
     to: "/services/wellness" as const,
   },
   {
     n: "03",
     title: "Modern Heritage",
     body: "Global sophistication meets African warmth. Refined finishes, sculptural form, and pieces that carry meaning.",
-    img: heritageImg,
+    img: "portfolio/earth-grain-material.jpg",
     to: "/services/heritage" as const,
   },
 ];
+
+// Retained because this original image remains part of the page's social-preview assets.
+void p2;
 
 const experienceRow1 = ["Peace", "Belonging", "Soul", "Comfort"];
 const experienceRow2 = ["Identity", "Refined", "Heritage", "Home"];
@@ -236,7 +235,7 @@ function Index() {
               >
                 <div className="w-full aspect-[4/5] overflow-hidden rounded-sm bg-clay/30 outline-1 -outline-offset-1 outline-black/5">
                   <img
-                    src={s.img}
+                    src={storageImageUrl(s.img)}
                     alt={s.title}
                     loading="lazy"
                     width={960}
@@ -445,23 +444,25 @@ function Index() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
             {[
-              { src: stylingImg, label: "Calm living rooms", span: "col-span-2 row-span-2 aspect-square" },
-              { src: p1, label: "Modern African textures", span: "aspect-[3/4]" },
-              { src: p2, label: "Styled bedrooms", span: "aspect-[3/4]" },
-              { src: heritageImg, label: "Shortlet styling", span: "aspect-[3/4]" },
-              { src: wellnessImg, label: "Natural materials", span: "col-span-2 aspect-[3/2]" },
-              { src: p3, label: "Wellness corners", span: "aspect-[3/4]" },
-              { src: heroImg, label: "Considered living", span: "col-span-2 aspect-[3/2]" },
+              { src: "portfolio/gathered-grace-dining.jpg", label: "Considered dining moments", span: "col-span-2 row-span-2 aspect-square", topSafe: true },
+              { src: "portfolio/texture-ritual-textile.jpg", label: "Textures, layered with intention", span: "aspect-[3/4]" },
+              { src: "portfolio/rest-reverie-bedroom.jpg", label: "Styled for rest", span: "aspect-[3/4]" },
+              { src: "portfolio/hosted-glow-living.jpg", label: "Guest-ready spaces", span: "aspect-[3/4]" },
+              { src: "portfolio/sunwashed-hearth-kitchen.jpg", label: "Warmth in every material", span: "col-span-2 aspect-[3/2]", topSafe: true },
+              { src: "portfolio/breath-belonging-corner.jpg", label: "Corners built for stillness", span: "aspect-[3/4]" },
+              { src: "portfolio/selah-living.jpg", label: "Considered living", span: "col-span-2 aspect-[3/2]", topSafe: true },
             ].map((tile, i) => (
               <figure
                 key={i}
                 className={`relative overflow-hidden rounded-sm bg-clay/30 group ${tile.span}`}
               >
                 <img
-                  src={tile.src}
+                  src={storageImageUrl(tile.src)}
                   alt={tile.label}
                   loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-[1400ms] group-hover:scale-[1.04]"
+                  className={`w-full h-full object-cover transition-transform duration-[1400ms] group-hover:scale-[1.04] ${
+                    tile.topSafe ? "object-top" : "object-center"
+                  }`}
                 />
                 <figcaption className="absolute bottom-0 left-0 right-0 p-4 text-[10px] uppercase tracking-[0.25em] text-bone bg-gradient-to-t from-charcoal/70 to-transparent">
                   {tile.label}
