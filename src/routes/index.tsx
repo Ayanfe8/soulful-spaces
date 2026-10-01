@@ -32,11 +32,13 @@ export const Route = createFileRoute("/")({
         content:
           "Modern African interior design. Wellness-inspired, story-driven spaces that feel like you.",
       },
-      { property: "og:image", content: heroImg },
+      { property: "og:image", content: "https://habitatbygrayson.com/og-home.jpg" },
+      { property: "og:url", content: "https://habitatbygrayson.com/" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: heroImg },
+      { name: "twitter:image", content: "https://habitatbygrayson.com/og-home.jpg" },
     ],
     links: [
+      { rel: "canonical", href: "https://habitatbygrayson.com/" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -215,9 +217,9 @@ function Index() {
       <section id="services" className="pt-12 md:pt-16 pb-32 md:pb-48 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
-            <h3 className="font-serif text-5xl md:text-6xl text-balance max-w-[16ch] leading-[1.05] font-light">
+            <h2 className="font-serif text-5xl md:text-6xl text-balance max-w-[16ch] leading-[1.05] font-light">
               How We Shape Your World
-            </h3>
+            </h2>
             <p className="max-w-[40ch] text-umber/70 text-pretty">
               Through spatial storytelling and wellness-centered design, we help you create a
               sanctuary — for private residences, shortlet apartments, and hospitality spaces.
@@ -246,9 +248,9 @@ function Index() {
                 <div className="flex gap-6">
                   <span className="font-serif text-2xl text-terracotta">{s.n}</span>
                   <div>
-                    <h4 className="font-serif text-2xl mb-3 font-medium group-hover:italic transition-all">
+                    <h3 className="font-serif text-2xl mb-3 font-medium group-hover:italic transition-all">
                       {s.title}
-                    </h4>
+                    </h3>
                     <p className="text-sm text-umber/75 leading-relaxed max-w-[40ch] text-pretty">
                       {s.body}
                     </p>

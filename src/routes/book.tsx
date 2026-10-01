@@ -30,7 +30,12 @@ export const Route = createFileRoute("/book")({
         content:
           "Begin your journey toward a soulful, intentional home. Book a consultation with our studio.",
       },
+      { property: "og:url", content: "https://habitatbygrayson.com/book" },
+      { property: "og:image", content: "https://habitatbygrayson.com/og-home.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://habitatbygrayson.com/og-home.jpg" },
     ],
+    links: [{ rel: "canonical", href: "https://habitatbygrayson.com/book" }],
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(siteSettingsQueryOptions()),
   component: BookPage,
@@ -217,7 +222,7 @@ function BookPage() {
             Begin Your Project
           </span>
           <h1 className="font-serif text-5xl md:text-7xl mt-6 font-light text-balance leading-[1.02]">
-            Book a <em className="italic text-clay">consultation</em>.
+            Book a <em className="italic text-clay pr-0">consultation</em><span className="-ml-[0.08em]">.</span>
           </h1>
           <p className="mt-8 text-base md:text-lg opacity-75 max-w-xl leading-relaxed">
             A focused conversation to understand your space, your story, and how we
