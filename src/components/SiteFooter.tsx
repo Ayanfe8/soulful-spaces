@@ -33,8 +33,7 @@ export function SiteFooter({ settings }: SiteFooterProps) {
               <div className="flex items-center gap-4">
                 <img
                   src={logo}
-                  alt=""
-                  aria-hidden="true"
+                  alt="Habitat by Grayson"
                   className="size-14 shrink-0 object-contain"
                   width={512}
                   height={512}
@@ -50,7 +49,7 @@ export function SiteFooter({ settings }: SiteFooterProps) {
             </div>
 
             <nav aria-label="Footer navigation">
-              <h2 className={labelClass}>Quick Links</h2>
+              <div className={labelClass}>Quick Links</div>
               <div className="mt-6 flex flex-col gap-4 text-sm">
                 <Link to="/" className={linkClass}>Home</Link>
                 <Link to="/portfolio" className={linkClass}>Portfolio</Link>
@@ -59,7 +58,7 @@ export function SiteFooter({ settings }: SiteFooterProps) {
             </nav>
 
             <nav aria-label="Services navigation">
-              <h2 className={labelClass}>Services</h2>
+              <div className={labelClass}>Services</div>
               <div className="mt-6 flex flex-col gap-4 text-sm">
                 <Link to="/services/styling" className={linkClass}>Styling</Link>
                 <Link to="/services/wellness" className={linkClass}>Wellness</Link>
@@ -68,7 +67,7 @@ export function SiteFooter({ settings }: SiteFooterProps) {
             </nav>
 
             <div>
-              <h2 className={labelClass}>Connect With Us</h2>
+              <div className={labelClass}>Connect With Us</div>
               <a
                 href={`mailto:${contactEmail}`}
                 className="mt-6 block w-fit text-sm text-bone transition-colors hover:text-terracotta"

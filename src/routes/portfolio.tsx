@@ -40,7 +40,9 @@ export const Route = createFileRoute("/portfolio")({
       },
       { property: "og:image", content: storageImageUrl("portfolio/portfolio-2.jpg") },
       { name: "twitter:image", content: storageImageUrl("portfolio/portfolio-2.jpg") },
+      { property: "og:url", content: "https://habitatbygrayson.com/portfolio" },
     ],
+    links: [{ rel: "canonical", href: "https://habitatbygrayson.com/portfolio" }],
   }),
   loader: ({ context }) =>
     Promise.all([

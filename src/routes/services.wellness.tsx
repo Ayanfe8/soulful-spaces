@@ -28,7 +28,9 @@ export const Route = createFileRoute("/services/wellness")({
       },
       { property: "og:image", content: storageImageUrl("services/service-wellness.jpg") },
       { name: "twitter:image", content: storageImageUrl("services/service-wellness.jpg") },
+      { property: "og:url", content: "https://habitatbygrayson.com/services/wellness" },
     ],
+    links: [{ rel: "canonical", href: "https://habitatbygrayson.com/services/wellness" }],
   }),
   errorComponent: ({ error }: { error: unknown }) => (
     <div role="alert" className="p-12">{error instanceof Error ? error.message : String(error)}</div>
