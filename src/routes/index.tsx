@@ -8,7 +8,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import heroImg from "@/assets/hero-interior.jpg";
 import heroNew from "@/assets/hero-interior-new.webp";
 import p2 from "@/assets/portfolio-2.jpg";
 import { useSuspenseQuery } from "@tanstack/react-query";
