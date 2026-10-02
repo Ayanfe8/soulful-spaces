@@ -581,7 +581,7 @@ function Index() {
               <span className="font-serif italic text-lg">hello@habitatbygrayson.com</span>
             </a>
             <a
-              href="https://instagram.com/habitatbygrayson"
+              href={settings?.instagram_url ?? "https://www.instagram.com/habitatbygrayson"}
               target="_blank"
               rel="noreferrer"
               className="flex flex-col items-center gap-2 hover:text-clay transition-colors"
