@@ -11,6 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { siteSettingsQueryOptions } from "../lib/site-settings-data";
+import { professionalServiceJsonLd } from "../lib/structured-data";
 
 function NotFoundComponent() {
   return (
@@ -88,7 +90,8 @@ function publicConfigScript() {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteSettingsQueryOptions()),
+  head: ({ loaderData }) => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -110,7 +113,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "icon", type: "image/png", href: "/favicon.png" },
     ],
-    scripts: publicConfigScript(),
+    scripts: [
+      ...publicConfigScript(),
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(professionalServiceJsonLd(loaderData)),
+      },
+    ],
   }),
 
   shellComponent: RootShell,
