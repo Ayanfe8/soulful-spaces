@@ -565,7 +565,7 @@ function Index() {
 
           <div className="mt-16 pt-10 border-t border-bone/15 grid grid-cols-1 sm:grid-cols-3 gap-8 text-sm">
             <a
-              href="https://wa.me/2340000000000"
+              href={settings?.whatsapp_url ?? "https://wa.link/zqrfyp"}
               target="_blank"
               rel="noreferrer"
               className="flex flex-col items-center gap-2 hover:text-clay transition-colors"
